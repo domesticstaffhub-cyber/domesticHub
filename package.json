@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:init": "node --env-file=.env scripts/init-firestore.mjs"
   },
   "dependencies": {
     "firebase-admin": "^13.4.0",

@@ -10,7 +10,7 @@ A Next.js service platform for Domestic Staffing Hub with customer requests, Wha
 npm install
 ```
 
-2. Copy `.env.example` to `.env.local` and fill in the real values.
+2. Fill the local `.env` file with the real private values.
 
 3. Run locally:
 
@@ -18,34 +18,35 @@ npm install
 npm run dev
 ```
 
-## Firebase App Hosting
+## Vercel + Firestore
 
-This project is configured for Firebase project `domesticstaff-de3cd`.
+Deploy the Next.js app on Vercel and use Firestore only for the database.
 
-Use Firebase App Hosting for the Next.js site because the app uses API routes for request handling and email notifications.
+The app writes leads through server API routes, so Firestore can stay in Production mode with direct browser reads/writes denied.
 
-1. Install Firebase CLI if needed:
+## Firestore Setup
+
+The database collections are created automatically when the first real service request or staff interest is submitted.
+
+If you want the collections to show immediately in Firebase Console, run:
+
+```bash
+npm run db:init
+```
+
+This creates lightweight `_schema` documents in:
+
+- `serviceRequests`
+- `jobApplications`
+
+To deploy Firestore rules from this project:
 
 ```bash
 npm install -g firebase-tools
-```
-
-2. Sign in and select the project:
-
-```bash
 firebase login
 firebase use domesticstaff-de3cd
-```
-
-3. In Firebase Console, enable Firestore.
-
-4. Deploy Firestore rules:
-
-```bash
 firebase deploy --only firestore
 ```
-
-5. Connect the GitHub repo to Firebase App Hosting, then set the live environment values/secrets in Firebase App Hosting.
 
 ## Environment Variables
 
@@ -63,9 +64,7 @@ firebase deploy --only firestore
 - `SMTP_APP_PASSWORD`
 - `FIREBASE_PROJECT_ID`
 
-Only use these service-account values for local development if needed. Firebase App Hosting can use Google application credentials automatically:
-
 - `FIREBASE_CLIENT_EMAIL`
 - `FIREBASE_PRIVATE_KEY`
 
-Firestore is required for live lead storage. Without Firebase credentials, the app stays in demo mode and warns through the UI/API response.
+Firestore is required for live lead storage. Add the same variables in Vercel Project Settings before deploying live.
