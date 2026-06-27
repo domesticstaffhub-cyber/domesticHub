@@ -26,7 +26,10 @@ export const services = [
       "Restaurant and hotel staffing",
       "Temporary or full-time placement"
     ],
-    highlights: ["Menu support", "Professional conduct", "Flexible schedules"]
+    highlights: ["Menu support", "Professional conduct", "Flexible schedules"],
+    audience: "Homes, restaurants, hotels, lounges, and event hosts",
+    process: "We listen to your kitchen routine, preferred cuisine, event size, and schedule before recommending the right chef profile.",
+    assurance: "Each request is handled with attention to hygiene, presentation, reliability, and the standard your space requires."
   },
   {
     slug: "driver",
@@ -53,7 +56,10 @@ export const services = [
       "Company and fleet drivers",
       "Temporary driver support"
     ],
-    highlights: ["Safety-minded", "Punctual service", "Polished presentation"]
+    highlights: ["Safety-minded", "Punctual service", "Polished presentation"],
+    audience: "Families, executives, businesses, schools, and logistics teams",
+    process: "We confirm your route pattern, schedule, vehicle expectations, and preferred driver arrangement before follow-up.",
+    assurance: "Requests are approached with a focus on safety, discretion, timing, and dependable day-to-day movement."
   },
   {
     slug: "home-tutor",
@@ -80,7 +86,10 @@ export const services = [
       "Homework support",
       "Weekend and holiday lessons"
     ],
-    highlights: ["Personalized lessons", "Calm learning support", "Progress-focused"]
+    highlights: ["Personalized lessons", "Calm learning support", "Progress-focused"],
+    audience: "Parents, guardians, primary learners, secondary learners, and exam candidates",
+    process: "We consider the learner's class level, subject needs, learning pace, location, and preferred lesson schedule.",
+    assurance: "The goal is calm, consistent learning support that helps each learner gain confidence and improve steadily."
   },
   {
     slug: "caregiver",
@@ -107,7 +116,10 @@ export const services = [
       "Elder care assistance",
       "Live-in or live-out staff"
     ],
-    highlights: ["Warm home support", "Flexible arrangements", "Peace of mind"]
+    highlights: ["Warm home support", "Flexible arrangements", "Peace of mind"],
+    audience: "Families, busy homes, parents, elderly loved ones, and private residences",
+    process: "We review the home routine, care needs, living arrangement, and level of experience required before guidance.",
+    assurance: "Every request is treated with care, privacy, and respect for the comfort of the people in the home."
   },
   {
     slug: "general-service",
@@ -132,7 +144,10 @@ export const services = [
       "Responsive team follow-up",
       "Tailored recommendations"
     ],
-    highlights: ["Personal guidance", "Broad support", "Easy request flow"]
+    highlights: ["Personal guidance", "Broad support", "Easy request flow"],
+    audience: "Clients with custom domestic, hospitality, or short-term support needs",
+    process: "Share the support you need in plain terms, and the team will help place it under the right service path.",
+    assurance: "You get a simpler starting point when the request does not fit neatly into one category."
   }
 ] as const;
 
@@ -152,10 +167,21 @@ export const stats = [
 ] as const;
 
 export const navLinks = [
+  { label: "About", href: "/about" },
   { label: "Services", href: "#services" },
   { label: "Request", href: "#request" },
   { label: "Contact", href: "#contact" }
 ] as const;
+
+export const companyStory = {
+  intro:
+    "Domestic Staffing Hub connects families, homes, and businesses with reliable domestic support handled with care, discretion, and professionalism.",
+  mission:
+    "To make trusted domestic staffing easier for clients by guiding each request with clarity, respect, and dependable follow-up.",
+  vision:
+    "To become a trusted name for domestic support in Warri and beyond, known for quality people, peace of mind, and service that feels personal.",
+  values: ["Trust", "Care", "Professional service", "Peace of mind"]
+} as const;
 
 export const jobSeekerFeature = {
   icon: BriefcaseBusiness,

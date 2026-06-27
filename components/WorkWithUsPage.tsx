@@ -3,77 +3,98 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, BriefcaseBusiness, LockKeyhole } from "lucide-react";
+import { ArrowLeft, BriefcaseBusiness, CheckCircle2, LockKeyhole, ShieldCheck } from "lucide-react";
+import { SiteHeader } from "@/components/SiteHeader";
 import { WorkWithUsForm } from "@/components/WorkWithUsForm";
 import { jobSeekerFeature } from "@/lib/services";
+
+const staffNotes = [
+  "Share your service category and experience",
+  "Continue to WhatsApp for direct follow-up",
+  "Keep customer service requests separate"
+] as const;
 
 export function WorkWithUsPage() {
   const Icon = jobSeekerFeature.icon;
 
   return (
-    <main className="min-h-screen bg-brand-ink text-brand-ink">
-      <section className="relative overflow-hidden px-4 py-8 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <nav className="flex items-center justify-between py-4">
-            <Link href="/" className="flex items-center gap-3 text-white">
-              <Image
-                src="/images/brand/logo.jpeg"
-                width={50}
-                height={50}
-                alt="Domestic Staffing Hub logo"
-                className="h-12 w-12 rounded-2xl object-cover"
-                priority
-              />
-              <span className="text-sm font-bold uppercase tracking-[0.18em]">Domestic Staffing Hub</span>
-            </Link>
+    <main className="min-h-screen bg-[#f7fbff] text-brand-ink">
+      <SiteHeader tone="dark" />
+
+      <section className="relative overflow-hidden bg-brand-ink px-4 pb-12 pt-28 text-white sm:px-6 sm:pb-16 sm:pt-32 lg:px-8">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/services/mission_vision.jpeg"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-center opacity-20"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-ink via-brand-ink/95 to-brand-navy/80" />
+        </div>
+
+        <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65 }}
+          >
             <Link
               href="/"
-              className="inline-flex h-11 items-center gap-2 rounded-full bg-white/10 px-4 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20"
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-bold text-white backdrop-blur transition hover:bg-white/20"
             >
-              <ArrowLeft size={17} />
-              Home
+              <ArrowLeft size={16} />
+              Back to homepage
             </Link>
-          </nav>
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm font-bold backdrop-blur">
+              <BriefcaseBusiness size={16} />
+              Staff Network
+            </span>
+            <h1 className="mt-6 max-w-2xl text-4xl font-black leading-tight sm:text-6xl">Work With Us</h1>
+            <p className="mt-5 max-w-2xl text-base leading-8 text-white/75">
+              For professionals who want to offer reliable domestic staffing services through Domestic Staffing Hub.
+            </p>
 
-          <div className="grid gap-8 py-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65 }}
-              className="text-white"
-            >
-              <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm font-bold backdrop-blur">
-                <BriefcaseBusiness size={16} />
-                Staff Network
-              </span>
-              <h1 className="text-5xl font-black leading-tight sm:text-6xl">Work With Us</h1>
-              <p className="mt-5 max-w-2xl text-base leading-7 text-white/76">
-                For professionals who want to offer reliable domestic staffing services through the company.
-              </p>
-              <div className="mt-7 grid gap-4 sm:grid-cols-2">
-                <div className="rounded-[1.5rem] border border-white/15 bg-white/10 p-5 backdrop-blur">
-                  <Icon size={24} className="text-brand-gold" />
-                  <h2 className="mt-4 text-lg font-bold">{jobSeekerFeature.title}</h2>
-                  <p className="mt-2 text-sm leading-6 text-white/70">{jobSeekerFeature.description}</p>
+            <div className="mt-8 grid gap-3">
+              {staffNotes.map((note) => (
+                <div key={note} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur">
+                  <CheckCircle2 size={18} className="shrink-0 text-brand-mint" />
+                  <span className="text-sm font-semibold text-white/80">{note}</span>
                 </div>
-                <div className="rounded-[1.5rem] border border-white/15 bg-white/10 p-5 backdrop-blur">
-                  <LockKeyhole size={24} className="text-brand-mint" />
-                  <h2 className="mt-4 text-lg font-bold">Private Staff Path</h2>
-                  <p className="mt-2 text-sm leading-6 text-white/70">
-                    Staff interests are handled on this page so service requests stay focused and simple.
-                  </p>
-                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.1 }}
+            className="grid gap-5 xl:grid-cols-[0.72fr_1fr] xl:items-stretch"
+          >
+            <div className="grid gap-5">
+              <div className="rounded-[2rem] border border-white/10 bg-white/10 p-5 backdrop-blur">
+                <Icon size={25} className="text-brand-gold" />
+                <h2 className="mt-5 text-xl font-black">{jobSeekerFeature.title}</h2>
+                <p className="mt-3 text-sm leading-7 text-white/70">{jobSeekerFeature.description}</p>
               </div>
-            </motion.div>
+              <div className="rounded-[2rem] border border-white/10 bg-brand-gold/15 p-5 backdrop-blur">
+                <LockKeyhole size={25} className="text-brand-gold" />
+                <h2 className="mt-5 text-xl font-black">Private Staff Path</h2>
+                <p className="mt-3 text-sm leading-7 text-white/70">
+                  Staff interests are handled here so customers stay focused on requesting services.
+                </p>
+              </div>
+              <div className="hidden rounded-[2rem] border border-white/10 bg-white/10 p-5 backdrop-blur xl:block">
+                <ShieldCheck size={25} className="text-brand-mint" />
+                <p className="mt-5 text-sm leading-7 text-white/70">
+                  Details are checked before submission, then sent through the dedicated staff-interest flow.
+                </p>
+              </div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, delay: 0.1 }}
-            >
-              <WorkWithUsForm />
-            </motion.div>
-          </div>
+            <WorkWithUsForm />
+          </motion.div>
         </div>
       </section>
     </main>

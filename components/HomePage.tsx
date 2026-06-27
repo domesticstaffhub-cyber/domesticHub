@@ -9,15 +9,15 @@ import {
   BadgeCheck,
   ChevronRight,
   Clock,
-  MapPin,
   MessageCircle,
   ShieldCheck,
   Sparkles
 } from "lucide-react";
-import { ContactActions } from "@/components/ContactActions";
 import { ServiceRequestForm } from "@/components/ServiceRequestForm";
+import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components/SiteHeader";
 import { WhatsAppModal } from "@/components/WhatsAppModal";
-import { jobSeekerFeature, navLinks, services, stats } from "@/lib/services";
+import { companyStory, services, stats } from "@/lib/services";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -35,38 +35,7 @@ export function HomePage() {
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#f7fbff] text-brand-ink">
-      <header className="fixed left-0 right-0 top-0 z-30 border-b border-white/25 bg-white/80 backdrop-blur-xl">
-        <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="/images/brand/logo.jpeg"
-              width={52}
-              height={52}
-              alt="Domestic Staffing Hub logo"
-              className="h-12 w-12 rounded-2xl object-cover"
-              priority
-            />
-            <span className="text-sm font-bold uppercase tracking-[0.18em] text-brand-navy sm:text-base">
-              Domestic Staffing Hub
-            </span>
-          </Link>
-          <div className="hidden items-center gap-7 md:flex">
-            {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="text-sm font-semibold text-slate-600 transition hover:text-brand-blue">
-                {link.label}
-              </a>
-            ))}
-          </div>
-          <button
-            type="button"
-            onClick={() => openChat()}
-            className="inline-flex h-11 items-center gap-2 rounded-full bg-brand-ink px-4 text-sm font-semibold text-white transition hover:bg-brand-navy"
-          >
-            <MessageCircle size={17} />
-            Chat
-          </button>
-        </nav>
-      </header>
+      <SiteHeader onChat={() => openChat()} />
 
       <section className="relative min-h-[88svh] overflow-hidden bg-brand-ink pt-20 text-white">
         <div className="absolute inset-0">
@@ -110,7 +79,7 @@ export function HomePage() {
             <h1 className="max-w-4xl text-5xl font-black leading-[1.02] text-white sm:text-6xl lg:text-7xl">
               Domestic Staffing Hub
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/82 sm:text-xl">
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/80 sm:text-xl">
               Quality people, trusted service, and peace of mind for homes, families, and businesses.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -226,6 +195,48 @@ export function HomePage() {
         </div>
       </section>
 
+      <section id="about-preview" className="relative overflow-hidden bg-brand-ink px-4 py-16 text-white sm:px-6 lg:px-8">
+        <div className="absolute inset-0 opacity-30">
+          <Image
+            src="/images/services/mission_vision.jpeg"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-ink via-brand-ink/90 to-brand-navy/75" />
+        <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <div>
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-bold backdrop-blur">
+              <Sparkles size={16} />
+              About the company
+            </span>
+            <h2 className="mt-5 max-w-2xl text-3xl font-black tracking-tight sm:text-4xl">
+              Built around trust, careful matching, and peace of mind.
+            </h2>
+            <p className="mt-5 max-w-2xl text-sm leading-7 text-white/75">{companyStory.intro}</p>
+            <Link
+              href="/about"
+              className="mt-7 inline-flex h-12 items-center gap-2 rounded-full bg-white px-5 text-sm font-bold text-brand-ink transition hover:bg-brand-gold"
+            >
+              View mission and vision
+              <ArrowRight size={17} />
+            </Link>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="rounded-[1.5rem] border border-white/10 bg-white/10 p-5 backdrop-blur">
+              <p className="text-sm font-bold text-brand-gold">Mission</p>
+              <p className="mt-3 text-sm leading-6 text-white/75">{companyStory.mission}</p>
+            </div>
+            <div className="rounded-[1.5rem] border border-white/10 bg-white/10 p-5 backdrop-blur">
+              <p className="text-sm font-bold text-brand-mint">Vision</p>
+              <p className="mt-3 text-sm leading-6 text-white/75">{companyStory.vision}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-white py-16">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
           <div>
@@ -276,41 +287,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <footer id="contact" className="bg-gradient-to-br from-white via-[#f4fbff] to-[#d8edff] px-4 py-10 text-brand-ink sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-6 rounded-[2rem] border border-white bg-white/70 p-5 shadow-soft backdrop-blur lg:grid-cols-[1fr_0.9fr] lg:items-center lg:p-7">
-          <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
-            <div className="grid h-32 w-32 shrink-0 place-items-center overflow-hidden rounded-[1.5rem] bg-white shadow-sm">
-              <Image
-                src="/images/services/full_logo.jpeg"
-                width={180}
-                height={240}
-                alt="Domestic Staffing Hub logo"
-                className="h-full w-full object-cover object-top"
-              />
-            </div>
-            <div>
-              <h2 className="text-3xl font-black">Domestic Staffing Hub</h2>
-              <p className="mt-3 max-w-lg text-sm leading-6 text-slate-600">
-                Quality people, trusted service, and peace of mind for homes, families, and businesses.
-              </p>
-            </div>
-          </div>
-          <div className="rounded-[1.5rem] bg-brand-ink p-5 text-white">
-            <ContactActions />
-            <div className="mt-5 flex gap-3 rounded-2xl border border-white/10 bg-white/10 p-4 text-sm leading-6 text-white/78">
-              <MapPin size={18} className="mt-1 shrink-0 text-brand-gold" />
-              <span>17/103, Enerhen Road, Adjacent Faith Victory Church, Warri</span>
-            </div>
-            <Link
-              href="/work-with-us"
-              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-gold transition hover:text-white"
-            >
-              {jobSeekerFeature.title}
-              <ArrowRight size={16} />
-            </Link>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
 
       <WhatsAppModal open={chatOpen} onClose={() => setChatOpen(false)} initialService={chatService} />
     </main>
