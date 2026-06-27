@@ -1,4 +1,4 @@
-import { cert, getApps, initializeApp } from "firebase-admin/app";
+import { applicationDefault, cert, getApps, initializeApp } from "firebase-admin/app";
 import { FieldValue, getFirestore } from "firebase-admin/firestore";
 
 const projectId = process.env.FIREBASE_PROJECT_ID;
@@ -6,7 +6,13 @@ const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
 const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n");
 
 export function isFirebaseConfigured() {
-  return Boolean(projectId && clientEmail && privateKey);
+  return Boolean(
+    process.env.FIREBASE_CONFIG ||
+      process.env.GOOGLE_CLOUD_PROJECT ||
+      process.env.GCLOUD_PROJECT ||
+      projectId ||
+      (clientEmail && privateKey)
+  );
 }
 
 export function getAdminDb() {
@@ -15,13 +21,22 @@ export function getAdminDb() {
   }
 
   if (!getApps().length) {
-    initializeApp({
-      credential: cert({
+    if (projectId && clientEmail && privateKey) {
+      initializeApp({
+        credential: cert({
+          projectId,
+          clientEmail,
+          privateKey
+        })
+      });
+    } else if (projectId) {
+      initializeApp({
         projectId,
-        clientEmail,
-        privateKey
-      })
-    });
+        credential: applicationDefault()
+      });
+    } else {
+      initializeApp();
+    }
   }
 
   return getFirestore();

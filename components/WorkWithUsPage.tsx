@@ -11,10 +11,9 @@ export function WorkWithUsPage() {
   const Icon = jobSeekerFeature.icon;
 
   return (
-    <main className="min-h-screen bg-mesh-light text-brand-ink">
+    <main className="min-h-screen bg-brand-ink text-brand-ink">
       <section className="relative overflow-hidden px-4 py-8 sm:px-6 lg:px-8">
-        <div className="absolute inset-x-0 top-0 h-[820px] bg-brand-ink lg:h-[760px]" />
-        <div className="relative mx-auto max-w-7xl">
+        <div className="mx-auto max-w-7xl">
           <nav className="flex items-center justify-between py-4">
             <Link href="/" className="flex items-center gap-3 text-white">
               <Image
@@ -36,7 +35,7 @@ export function WorkWithUsPage() {
             </Link>
           </nav>
 
-          <div className="grid gap-8 py-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+          <div className="grid gap-8 py-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
@@ -51,7 +50,7 @@ export function WorkWithUsPage() {
               <p className="mt-5 max-w-2xl text-base leading-7 text-white/76">
                 For professionals who want to offer reliable domestic staffing services through the company.
               </p>
-              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              <div className="mt-7 grid gap-4 sm:grid-cols-2">
                 <div className="rounded-[1.5rem] border border-white/15 bg-white/10 p-5 backdrop-blur">
                   <Icon size={24} className="text-brand-gold" />
                   <h2 className="mt-4 text-lg font-bold">{jobSeekerFeature.title}</h2>

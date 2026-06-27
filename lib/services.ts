@@ -9,6 +9,7 @@ export const services = [
     detail:
       "Enjoy dependable culinary support from chefs selected for skill, hygiene, presentation, and the needs of your home or business.",
     image: "/images/services/chef.jpg",
+    imagePosition: "center 38%",
     accent: "from-brand-gold/35 via-white to-brand-sky/30",
     icon: ChefHat,
     services: [
@@ -35,6 +36,7 @@ export const services = [
     detail:
       "Move with confidence through courteous drivers and chauffeurs matched for safety, discretion, punctuality, and professionalism.",
     image: "/images/services/driver_chauffeur.jpg",
+    imagePosition: "center 36%",
     accent: "from-brand-blue/25 via-white to-brand-mint/25",
     icon: Car,
     services: [
@@ -61,6 +63,7 @@ export const services = [
     detail:
       "Give learners structured support at home through educators matched to their level, pace, schedule, and learning goals.",
     image: "/images/services/home_tutor.jpg",
+    imagePosition: "center 34%",
     accent: "from-brand-mint/25 via-white to-brand-gold/25",
     icon: GraduationCap,
     services: [
@@ -87,6 +90,7 @@ export const services = [
     detail:
       "Bring comfort and order into the home with caring domestic staff selected for reliability, respect, and day-to-day support.",
     image: "/images/services/maid_nanny_caregiver.jpg",
+    imagePosition: "center 24%",
     accent: "from-brand-sky/25 via-white to-brand-gold/20",
     icon: HeartHandshake,
     services: [
@@ -112,7 +116,8 @@ export const services = [
     summary: "Not sure which category fits? Share your need and the team will guide you.",
     detail:
       "For household, hospitality, or support needs that do not fit neatly into one category, Domestic Staffing Hub helps you find the right next step.",
-    image: "/images/services/full_logo.jpeg",
+    image: "/images/services/general-service.png",
+    imagePosition: "center 22%",
     accent: "from-brand-blue/20 via-white to-brand-gold/20",
     icon: Home,
     services: [
@@ -143,7 +148,7 @@ export const seekerCategories = [
 export const stats = [
   { value: "5", label: "Service paths" },
   { value: "24h", label: "Prompt follow-up" },
-  { value: "1", label: "Trusted support team" }
+  { value: "Support team", label: "" }
 ] as const;
 
 export const navLinks = [

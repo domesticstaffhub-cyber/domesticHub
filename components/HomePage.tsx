@@ -9,6 +9,7 @@ import {
   BadgeCheck,
   ChevronRight,
   Clock,
+  MapPin,
   MessageCircle,
   ShieldCheck,
   Sparkles
@@ -78,7 +79,15 @@ export function HomePage() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.09 }}
               >
-                <Image src={service.image} alt="" fill sizes="34vw" className="object-cover" priority={index < 2} />
+                <Image
+                  src={service.image}
+                  alt=""
+                  fill
+                  sizes="34vw"
+                  className="object-cover"
+                  style={{ objectPosition: service.imagePosition }}
+                  priority={index < 2}
+                />
               </motion.div>
             ))}
           </div>
@@ -129,8 +138,8 @@ export function HomePage() {
         <div className="grid overflow-hidden rounded-[2rem] bg-white shadow-glow md:grid-cols-3">
           {stats.map((stat) => (
             <div key={stat.label} className="border-b border-slate-100 p-6 md:border-b-0 md:border-r last:md:border-r-0">
-              <p className="text-3xl font-black text-brand-navy">{stat.value}</p>
-              <p className="mt-1 text-sm font-medium text-slate-500">{stat.label}</p>
+              <p className={`${stat.label ? "text-3xl" : "text-2xl"} font-black text-brand-navy`}>{stat.value}</p>
+              {stat.label ? <p className="mt-1 text-sm font-medium text-slate-500">{stat.label}</p> : null}
             </div>
           ))}
         </div>
@@ -166,8 +175,15 @@ export function HomePage() {
                 className={`group overflow-hidden rounded-[2rem] bg-gradient-to-br ${service.accent} p-4 shadow-soft`}
               >
                 <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
-                  <div className="relative min-h-72 overflow-hidden rounded-[1.5rem]">
-                    <Image src={service.image} alt={service.title} fill sizes="(min-width: 1024px) 38vw, 92vw" className="object-cover transition duration-700 group-hover:scale-105" />
+                  <div className="relative min-h-[22rem] overflow-hidden rounded-[1.5rem] lg:min-h-72">
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      fill
+                      sizes="(min-width: 1024px) 38vw, 92vw"
+                      className="object-cover transition duration-700 group-hover:scale-105"
+                      style={{ objectPosition: service.imagePosition }}
+                    />
                   </div>
                   <div className="flex flex-col justify-between gap-5 p-2">
                     <div>
@@ -260,32 +276,38 @@ export function HomePage() {
         </div>
       </section>
 
-      <footer id="contact" className="bg-brand-ink px-4 py-12 text-white sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[360px_1fr] lg:items-center">
-          <div className="mx-auto w-full max-w-sm overflow-hidden rounded-[2rem] border border-white/10 bg-white p-3 shadow-glow lg:mx-0">
-            <Image
-              src="/images/services/full_logo.jpeg"
-              width={460}
-              height={620}
-              alt="Domestic Staffing Hub logo"
-              className="h-[420px] w-full rounded-[1.5rem] object-cover object-top"
-            />
-          </div>
-          <div>
-            <h2 className="mt-5 text-3xl font-black">Domestic Staffing Hub</h2>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-white/70">
-              Quality people, trusted service, peace of mind.
-            </p>
-            <div className="mt-6 grid gap-5">
-              <ContactActions />
-              <Link
-                href="/work-with-us"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-brand-gold transition hover:text-white"
-              >
-                {jobSeekerFeature.title}
-                <ArrowRight size={16} />
-              </Link>
+      <footer id="contact" className="bg-gradient-to-br from-white via-[#f4fbff] to-[#d8edff] px-4 py-10 text-brand-ink sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-6 rounded-[2rem] border border-white bg-white/70 p-5 shadow-soft backdrop-blur lg:grid-cols-[1fr_0.9fr] lg:items-center lg:p-7">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
+            <div className="grid h-32 w-32 shrink-0 place-items-center overflow-hidden rounded-[1.5rem] bg-white shadow-sm">
+              <Image
+                src="/images/services/full_logo.jpeg"
+                width={180}
+                height={240}
+                alt="Domestic Staffing Hub logo"
+                className="h-full w-full object-cover object-top"
+              />
             </div>
+            <div>
+              <h2 className="text-3xl font-black">Domestic Staffing Hub</h2>
+              <p className="mt-3 max-w-lg text-sm leading-6 text-slate-600">
+                Quality people, trusted service, and peace of mind for homes, families, and businesses.
+              </p>
+            </div>
+          </div>
+          <div className="rounded-[1.5rem] bg-brand-ink p-5 text-white">
+            <ContactActions />
+            <div className="mt-5 flex gap-3 rounded-2xl border border-white/10 bg-white/10 p-4 text-sm leading-6 text-white/78">
+              <MapPin size={18} className="mt-1 shrink-0 text-brand-gold" />
+              <span>17/103, Enerhen Road, Adjacent Faith Victory Church, Warri</span>
+            </div>
+            <Link
+              href="/work-with-us"
+              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-gold transition hover:text-white"
+            >
+              {jobSeekerFeature.title}
+              <ArrowRight size={16} />
+            </Link>
           </div>
         </div>
       </footer>

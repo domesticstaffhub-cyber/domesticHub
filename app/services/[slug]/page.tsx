@@ -104,6 +104,7 @@ export default async function ServicePage({ params }: PageProps) {
                 fill
                 sizes="(min-width: 1024px) 48vw, 92vw"
                 className="object-cover object-top"
+                style={{ objectPosition: service.imagePosition }}
                 priority
               />
             </div>
