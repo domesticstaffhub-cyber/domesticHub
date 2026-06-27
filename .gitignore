@@ -11,3 +11,4 @@ pnpm-debug.log*
 .vercel
 .next-dev.log
 .next-dev.err.log
+.secrets/
