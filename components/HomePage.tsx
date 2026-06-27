@@ -72,9 +72,9 @@ export function HomePage() {
             transition={{ duration: 0.7 }}
             className="max-w-3xl"
           >
-            <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm font-semibold text-white backdrop-blur">
-              <Sparkles size={16} />
-              Verified domestic staffing for homes and businesses
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-white/90 backdrop-blur sm:text-sm">
+              <Sparkles size={14} />
+              Domestic staffing for homes and businesses
             </span>
             <h1 className="max-w-4xl text-5xl font-black leading-[1.02] text-white sm:text-6xl lg:text-7xl">
               Domestic Staffing Hub
@@ -195,7 +195,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="about-preview" className="relative overflow-hidden bg-brand-ink px-4 py-16 text-white sm:px-6 lg:px-8">
+      <section id="about" className="relative overflow-hidden bg-brand-ink px-4 py-16 text-white sm:px-6 lg:px-8">
         <div className="absolute inset-0 opacity-30">
           <Image
             src="/images/services/mission_vision.jpeg"
@@ -217,7 +217,7 @@ export function HomePage() {
             </h2>
             <p className="mt-5 max-w-2xl text-sm leading-7 text-white/75">{companyStory.intro}</p>
             <Link
-              href="/about"
+              href="#about"
               className="mt-7 inline-flex h-12 items-center gap-2 rounded-full bg-white px-5 text-sm font-bold text-brand-ink transition hover:bg-brand-gold"
             >
               View mission and vision

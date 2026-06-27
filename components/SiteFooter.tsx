@@ -24,7 +24,7 @@ export function SiteFooter() {
               Quality people, trusted service, and peace of mind for homes, families, and businesses.
             </p>
             <Link
-              href="/about"
+              href="/#about"
               className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-brand-navy transition hover:text-brand-blue"
             >
               Learn about the company

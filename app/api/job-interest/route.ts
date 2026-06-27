@@ -50,19 +50,23 @@ export async function POST(request: NextRequest) {
     const saved = await saveLead("jobApplications", data);
 
     if (saved.configured) {
-      await sendNotificationEmail({
-        subject: `New work interest: ${data.serviceLabel}`,
-        text: [
-          "A potential staff member submitted interest.",
-          "",
-          `Name: ${data.name}`,
-          `Email: ${data.email}`,
-          `Phone: ${data.phone}`,
-          `Work Category: ${data.serviceLabel}`,
-          `Experience: ${data.experience || "Not provided"}`,
-          `Lead ID: ${saved.id}`
-        ].join("\n")
-      });
+      try {
+        await sendNotificationEmail({
+          subject: `New work interest: ${data.serviceLabel}`,
+          text: [
+            "A potential staff member submitted interest.",
+            "",
+            `Name: ${data.name}`,
+            `Email: ${data.email}`,
+            `Phone: ${data.phone}`,
+            `Work Category: ${data.serviceLabel}`,
+            `Experience: ${data.experience || "Not provided"}`,
+            `Lead ID: ${saved.id}`
+          ].join("\n")
+        });
+      } catch (emailError) {
+        console.error("Job interest email notification failed", emailError);
+      }
     }
 
     const whatsappMessage = `Hello, my name is ${data.name}. I am interested in working with Domestic Staffing Hub under ${data.serviceLabel}. My email is ${data.email} and my phone number is ${data.phone}.`;

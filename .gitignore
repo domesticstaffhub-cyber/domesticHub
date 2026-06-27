@@ -12,3 +12,4 @@ pnpm-debug.log*
 .next-dev.log
 .next-dev.err.log
 .secrets/
+.vscode/

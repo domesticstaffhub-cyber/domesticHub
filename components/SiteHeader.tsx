@@ -50,7 +50,7 @@ export function SiteHeader({ onChat, tone = "light" }: SiteHeaderProps) {
 
         <div className="flex items-center gap-2">
           <Link
-            href="/about"
+            href="/#about"
             className={`hidden h-10 items-center rounded-full px-4 text-sm font-bold transition sm:inline-flex lg:hidden ${
               isDark ? "bg-white/10 text-white hover:bg-white/20" : "bg-brand-blue/10 text-brand-navy hover:bg-brand-blue/15"
             }`}

@@ -167,7 +167,7 @@ export const stats = [
 ] as const;
 
 export const navLinks = [
-  { label: "About", href: "/about" },
+  { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
   { label: "Request", href: "#request" },
   { label: "Contact", href: "#contact" }

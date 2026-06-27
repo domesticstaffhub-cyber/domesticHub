@@ -46,19 +46,23 @@ export async function POST(request: NextRequest) {
     const saved = await saveLead("serviceRequests", data);
 
     if (saved.configured) {
-      await sendNotificationEmail({
-        subject: `New service request: ${data.serviceType}`,
-        text: [
-          "A new customer service request was submitted.",
-          "",
-          `Name: ${data.name}`,
-          `Email: ${data.email}`,
-          `Phone: ${data.phone || "Not provided"}`,
-          `Service: ${data.serviceType}`,
-          `Message: ${data.message || "Not provided"}`,
-          `Lead ID: ${saved.id}`
-        ].join("\n")
-      });
+      try {
+        await sendNotificationEmail({
+          subject: `New service request: ${data.serviceType}`,
+          text: [
+            "A new customer service request was submitted.",
+            "",
+            `Name: ${data.name}`,
+            `Email: ${data.email}`,
+            `Phone: ${data.phone || "Not provided"}`,
+            `Service: ${data.serviceType}`,
+            `Message: ${data.message || "Not provided"}`,
+            `Lead ID: ${saved.id}`
+          ].join("\n")
+        });
+      } catch (emailError) {
+        console.error("Service request email notification failed", emailError);
+      }
     }
 
     return NextResponse.json({
