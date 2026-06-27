@@ -78,8 +78,8 @@ export function ServiceRequestForm() {
           <ShieldCheck size={22} />
         </span>
         <div>
-          <h2 className="text-2xl font-semibold text-brand-ink">Request verified staff</h2>
-          <p className="text-sm text-slate-500">Validated intake, direct follow-up, no exposed application flow.</p>
+          <h2 className="text-2xl font-semibold text-brand-ink">Request trusted staff</h2>
+          <p className="text-sm text-slate-500">Share a few details and the team will follow up.</p>
         </div>
       </div>
 
@@ -131,7 +131,7 @@ export function ServiceRequestForm() {
           <textarea
             name="message"
             rows={4}
-            placeholder="Tell us the location, schedule, and any special requirement."
+            placeholder="Tell us the role, location, schedule, and any special requirement."
             className="field-input min-h-32 resize-none py-3"
           />
         </Field>

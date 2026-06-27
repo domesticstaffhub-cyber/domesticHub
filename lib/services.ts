@@ -1,13 +1,14 @@
-import { BriefcaseBusiness, Car, ChefHat, GraduationCap, HeartHandshake } from "lucide-react";
+import { BriefcaseBusiness, Car, ChefHat, GraduationCap, HeartHandshake, Home } from "lucide-react";
 
 export const services = [
   {
     slug: "chef",
     title: "Chefs",
     shortTitle: "Chef",
-    summary:
-      "Private, restaurant, hotel, pastry, event, and temporary chefs matched to the exact rhythm of your home or business.",
-    image: "/images/services/chef.jpeg",
+    summary: "Professional chefs for homes, events, restaurants, hotels, and private dining.",
+    detail:
+      "Enjoy dependable culinary support from chefs selected for skill, hygiene, presentation, and the needs of your home or business.",
+    image: "/images/services/chef.jpg",
     accent: "from-brand-gold/35 via-white to-brand-sky/30",
     icon: ChefHat,
     services: [
@@ -19,19 +20,21 @@ export const services = [
       "Temporary and full-time chef staffing"
     ],
     promise: [
-      "Skilled and experienced chefs",
-      "Reliable recruitment process",
-      "Professionals for homes and businesses",
-      "Flexible staffing solutions"
-    ]
+      "Private and family chefs",
+      "Event and catering support",
+      "Restaurant and hotel staffing",
+      "Temporary or full-time placement"
+    ],
+    highlights: ["Menu support", "Professional conduct", "Flexible schedules"]
   },
   {
     slug: "driver",
     title: "Drivers & Chauffeurs",
     shortTitle: "Driver",
-    summary:
-      "Verified personal, family, executive, logistics, fleet, and contract drivers selected for safety and professionalism.",
-    image: "/images/services/driver.jpeg",
+    summary: "Reliable personal, family, executive, and company drivers for everyday movement.",
+    detail:
+      "Move with confidence through courteous drivers and chauffeurs matched for safety, discretion, punctuality, and professionalism.",
+    image: "/images/services/driver_chauffeur.jpg",
     accent: "from-brand-blue/25 via-white to-brand-mint/25",
     icon: Car,
     services: [
@@ -43,19 +46,21 @@ export const services = [
       "Driver verification and background checks"
     ],
     promise: [
-      "Verified and experienced drivers",
-      "Professional recruitment process",
-      "Reliable and trustworthy personnel",
-      "Fast and efficient placement"
-    ]
+      "Personal and family drivers",
+      "Executive chauffeurs",
+      "Company and fleet drivers",
+      "Temporary driver support"
+    ],
+    highlights: ["Safety-minded", "Punctual service", "Polished presentation"]
   },
   {
     slug: "home-tutor",
     title: "Home Tutors",
     shortTitle: "Home Tutor",
-    summary:
-      "Qualified tutors for primary and secondary learners, exams, assignments, and one-on-one academic support.",
-    image: "/images/services/home-tutor.jpeg",
+    summary: "Patient, focused tutors for lessons, exam prep, assignments, and academic growth.",
+    detail:
+      "Give learners structured support at home through educators matched to their level, pace, schedule, and learning goals.",
+    image: "/images/services/home_tutor.jpg",
     accent: "from-brand-mint/25 via-white to-brand-gold/25",
     icon: GraduationCap,
     services: [
@@ -67,19 +72,21 @@ export const services = [
       "Weekend and holiday lessons"
     ],
     promise: [
-      "Qualified and experienced educators",
-      "Personalized teaching approach",
-      "Flexible learning schedule",
-      "Safe and professional service"
-    ]
+      "Primary and secondary tutoring",
+      "Exam preparation",
+      "Homework support",
+      "Weekend and holiday lessons"
+    ],
+    highlights: ["Personalized lessons", "Calm learning support", "Progress-focused"]
   },
   {
     slug: "caregiver",
     title: "Maid, Nanny & Caregiver",
     shortTitle: "Caregiver",
-    summary:
-      "Trusted domestic staff for housekeeping, nanny care, childcare, elder care, home support, and companionship.",
-    image: "/images/services/maid-nanny-caregiver.jpeg",
+    summary: "Trusted support for housekeeping, childcare, nanny care, elder care, and companionship.",
+    detail:
+      "Bring comfort and order into the home with caring domestic staff selected for reliability, respect, and day-to-day support.",
+    image: "/images/services/maid_nanny_caregiver.jpg",
     accent: "from-brand-sky/25 via-white to-brand-gold/20",
     icon: HeartHandshake,
     services: [
@@ -91,11 +98,36 @@ export const services = [
       "Housekeeping and companion services"
     ],
     promise: [
-      "Trusted and verified personnel",
-      "Professional and experienced staff",
-      "Reliable and affordable services",
-      "Flexible service options"
-    ]
+      "Housekeeping services",
+      "Nanny and childcare support",
+      "Elder care assistance",
+      "Live-in or live-out staff"
+    ],
+    highlights: ["Warm home support", "Flexible arrangements", "Peace of mind"]
+  },
+  {
+    slug: "general-service",
+    title: "General Domestic Service",
+    shortTitle: "General Service",
+    summary: "Not sure which category fits? Share your need and the team will guide you.",
+    detail:
+      "For household, hospitality, or support needs that do not fit neatly into one category, Domestic Staffing Hub helps you find the right next step.",
+    image: "/images/services/full_logo.jpeg",
+    accent: "from-brand-blue/20 via-white to-brand-gold/20",
+    icon: Home,
+    services: [
+      "Household support requests",
+      "Hospitality support",
+      "Short-term staffing needs",
+      "Custom service matching"
+    ],
+    promise: [
+      "Guided service selection",
+      "Flexible support options",
+      "Responsive team follow-up",
+      "Tailored recommendations"
+    ],
+    highlights: ["Personal guidance", "Broad support", "Easy request flow"]
   }
 ] as const;
 
@@ -105,15 +137,13 @@ export const serviceOptions = services.map((service) => ({
 }));
 
 export const seekerCategories = [
-  ...serviceOptions,
-  { label: "General Domestic Support", value: "general-domestic-support" },
-  { label: "Other Verified Role", value: "other-verified-role" }
+  ...serviceOptions
 ] as const;
 
 export const stats = [
-  { value: "4", label: "Core staffing categories" },
-  { value: "24h", label: "Fast request follow-up" },
-  { value: "100%", label: "Validated request intake" }
+  { value: "5", label: "Service paths" },
+  { value: "24h", label: "Prompt follow-up" },
+  { value: "1", label: "Trusted support team" }
 ] as const;
 
 export const navLinks = [
@@ -126,5 +156,9 @@ export const jobSeekerFeature = {
   icon: BriefcaseBusiness,
   title: "Work with Domestic Staffing Hub",
   description:
-    "A separate intake path for verified professionals who want to join the staffing network."
+    "A private path for professionals who want to offer their skills through the company."
 };
+
+export function getServiceBySlug(slug: string) {
+  return services.find((service) => service.slug === slug);
+}

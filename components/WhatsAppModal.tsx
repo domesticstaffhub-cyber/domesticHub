@@ -134,7 +134,7 @@ export function WhatsAppModal({ open, onClose, initialService }: WhatsAppModalPr
       <DemoDialog
         open={demoOpen}
         title="Demo WhatsApp Number"
-        message="This WhatsApp number is a placeholder for preview. Kindly update NEXT_PUBLIC_WHATSAPP_NUMBER before launch so customers are redirected to the correct support line."
+        message="This WhatsApp number is a demo placeholder. Kindly update it with the official support line before launch."
         onClose={() => setDemoOpen(false)}
       />
     </>

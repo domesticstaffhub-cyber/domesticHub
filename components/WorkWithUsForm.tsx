@@ -66,7 +66,7 @@ export function WorkWithUsForm() {
 
       if (result.demo) {
         setDemoMessage(
-          "This is using demo contact settings. Add the real WhatsApp number and Firestore credentials in Vercel before accepting live job interest submissions."
+          "This is using demo contact settings. Add the real WhatsApp number before accepting live staff interest submissions."
         );
         setDemoOpen(true);
       } else {
@@ -89,8 +89,8 @@ export function WorkWithUsForm() {
             <BriefcaseBusiness size={22} />
           </span>
           <div>
-            <h2 className="text-2xl font-semibold text-brand-ink">Staff interest intake</h2>
-            <p className="text-sm text-slate-500">This path is separated from the customer service request flow.</p>
+            <h2 className="text-2xl font-semibold text-brand-ink">Join the staff network</h2>
+            <p className="text-sm text-slate-500">Share your details and continue on WhatsApp.</p>
           </div>
         </div>
 

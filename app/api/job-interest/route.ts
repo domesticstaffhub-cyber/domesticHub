@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
       whatsappUrl: createWhatsAppLink(contact.whatsappNumber, whatsappMessage),
       message: saved.configured
         ? "Details received. Continue to WhatsApp to complete the work interest conversation."
-        : "Demo mode: details validated, but Firestore is not configured yet."
+        : "Demo mode: details checked successfully. Add live contact settings before launch."
     });
   } catch (error) {
     console.error("Job interest failed", error);

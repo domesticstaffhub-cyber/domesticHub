@@ -102,8 +102,7 @@ export function HomePage() {
               Domestic Staffing Hub
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/82 sm:text-xl">
-              Reliable chefs, drivers, home tutors, nannies, caregivers, and household support personnel matched with a
-              careful intake process and direct team follow-up.
+              Quality people, trusted service, and peace of mind for homes, families, and businesses.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
@@ -137,20 +136,19 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="services" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <section id="services" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full bg-brand-blue/10 px-4 py-2 text-sm font-bold text-brand-navy">
               <BadgeCheck size={16} />
               Services
             </span>
-            <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-ink sm:text-5xl">
-              Staffing that fits the exact need
+            <h2 className="mt-4 text-3xl font-black tracking-tight text-brand-ink sm:text-4xl">
+              Choose the support you need
             </h2>
           </div>
-          <p className="max-w-xl text-base leading-7 text-slate-600">
-            Each request starts with a focused intake, then moves to the Domestic Staffing Hub team for follow-up,
-            screening, and service coordination.
+          <p className="max-w-xl text-sm leading-6 text-slate-600">
+            Explore the main service areas, then request staff or chat with the team for quick guidance.
           </p>
         </div>
 
@@ -180,7 +178,7 @@ export function HomePage() {
                       <p className="mt-3 text-sm leading-6 text-slate-600">{service.summary}</p>
                     </div>
                     <div className="grid gap-2">
-                      {service.promise.slice(0, 3).map((item) => (
+                      {service.promise.slice(0, 2).map((item) => (
                         <div key={item} className="flex items-center gap-2 text-sm font-semibold text-brand-ink">
                           <ShieldCheck size={16} className="text-brand-mint" />
                           {item}
@@ -196,13 +194,13 @@ export function HomePage() {
                         <MessageCircle size={16} />
                         Chat
                       </button>
-                      <a
-                        href="#request"
+                      <Link
+                        href={`/services/${service.slug}`}
                         className="inline-flex h-11 items-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-brand-ink transition hover:bg-brand-gold"
                       >
-                        Request
+                        Details
                         <ChevronRight size={16} />
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -212,21 +210,20 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="bg-white py-20">
+      <section className="bg-white py-16">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full bg-brand-mint/10 px-4 py-2 text-sm font-bold text-emerald-700">
               <Clock size={16} />
               Process
             </span>
-            <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-ink sm:text-5xl">Simple request, serious handling</h2>
-            <p className="mt-5 text-base leading-7 text-slate-600">
-              Customers only see the service request experience. Staff interest is kept on its own page so the main
-              platform stays focused on service demand.
+            <h2 className="mt-4 text-3xl font-black tracking-tight text-brand-ink sm:text-4xl">Simple request, careful handling</h2>
+            <p className="mt-5 text-sm leading-6 text-slate-600">
+              Tell us what you need, and the team will guide the next step with care and discretion.
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
-            {["Choose the service", "Submit validated details", "Continue with the team"].map((item, index) => (
+            {["Choose a service", "Share your details", "Speak with the team"].map((item, index) => (
               <div key={item} className="rounded-[1.5rem] border border-slate-100 bg-[#f7fbff] p-5">
                 <span className="grid h-10 w-10 place-items-center rounded-full bg-brand-ink text-sm font-black text-white">
                   {index + 1}
@@ -234,10 +231,10 @@ export function HomePage() {
                 <h3 className="mt-5 text-lg font-bold text-brand-ink">{item}</h3>
                 <p className="mt-2 text-sm leading-6 text-slate-600">
                   {index === 0
-                    ? "Review the available staffing categories and pick the closest fit."
+                    ? "Pick the category that best matches your need."
                     : index === 1
-                      ? "Form fields are checked before submission and again on the server."
-                      : "Leads go to Firestore and email, with WhatsApp available for live chat."}
+                      ? "Send the basics so we can understand the request."
+                      : "Get a prompt follow-up or continue on WhatsApp."}
                 </p>
               </div>
             ))}
@@ -245,19 +242,18 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="request" className="bg-mesh-light px-4 py-20 sm:px-6 lg:px-8">
+      <section id="request" className="bg-mesh-light px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-brand-navy shadow-sm">
               <ShieldCheck size={16} />
               Secure Intake
             </span>
-            <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-ink sm:text-5xl">
-              Tell us what kind of staff you need
+            <h2 className="mt-4 text-3xl font-black tracking-tight text-brand-ink sm:text-4xl">
+              Request dependable staff
             </h2>
-            <p className="mt-5 text-base leading-7 text-slate-600">
-              The form accepts only expected fields, validates the selected service, limits message length, and rejects
-              suspicious hidden-field submissions.
+            <p className="mt-5 text-sm leading-6 text-slate-600">
+              Share the service, location, schedule, and any special preference. The team will follow up from there.
             </p>
           </div>
           <ServiceRequestForm />
@@ -265,30 +261,31 @@ export function HomePage() {
       </section>
 
       <footer id="contact" className="bg-brand-ink px-4 py-12 text-white sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_auto] lg:items-center">
-          <div>
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[360px_1fr] lg:items-center">
+          <div className="mx-auto w-full max-w-sm overflow-hidden rounded-[2rem] border border-white/10 bg-white p-3 shadow-glow lg:mx-0">
             <Image
-              src="/images/brand/logo.jpeg"
-              width={64}
-              height={64}
+              src="/images/services/full_logo.jpeg"
+              width={460}
+              height={620}
               alt="Domestic Staffing Hub logo"
-              className="h-16 w-16 rounded-2xl object-cover"
+              className="h-[420px] w-full rounded-[1.5rem] object-cover object-top"
             />
+          </div>
+          <div>
             <h2 className="mt-5 text-3xl font-black">Domestic Staffing Hub</h2>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-white/70">
-              Modern staffing intake for households, restaurants, hotels, families, and businesses that need dependable
-              domestic support.
+              Quality people, trusted service, peace of mind.
             </p>
-          </div>
-          <div className="grid gap-5">
-            <ContactActions />
-            <Link
-              href="/work-with-us"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-brand-gold transition hover:text-white"
-            >
-              {jobSeekerFeature.title}
-              <ArrowRight size={16} />
-            </Link>
+            <div className="mt-6 grid gap-5">
+              <ContactActions />
+              <Link
+                href="/work-with-us"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-brand-gold transition hover:text-white"
+              >
+                {jobSeekerFeature.title}
+                <ArrowRight size={16} />
+              </Link>
+            </div>
           </div>
         </div>
       </footer>

@@ -24,7 +24,7 @@ export function ContactActions() {
     setDemo({
       open: true,
       title: `Demo ${label}`,
-      message: `This ${label.toLowerCase()} is a placeholder for preview. Kindly update the real ${label.toLowerCase()} in the environment variables before launch.`
+      message: `This ${label.toLowerCase()} is a demo placeholder. Kindly update it with the official ${label.toLowerCase()} before launch.`
     });
   }
 

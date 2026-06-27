@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
       demo: !saved.configured,
       message: saved.configured
         ? "Request received. Our team will contact you shortly."
-        : "Demo mode: request validated, but Firestore is not configured yet."
+        : "Demo mode: request checked successfully. Add live contact settings before launch."
     });
   } catch (error) {
     console.error("Service request failed", error);

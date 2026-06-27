@@ -49,8 +49,7 @@ export function WorkWithUsPage() {
               </span>
               <h1 className="text-5xl font-black leading-tight sm:text-6xl">Work With Us</h1>
               <p className="mt-5 max-w-2xl text-base leading-7 text-white/76">
-                A separate intake page for people who want to offer professional domestic staffing services through the
-                company.
+                For professionals who want to offer reliable domestic staffing services through the company.
               </p>
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
                 <div className="rounded-[1.5rem] border border-white/15 bg-white/10 p-5 backdrop-blur">
@@ -60,10 +59,9 @@ export function WorkWithUsPage() {
                 </div>
                 <div className="rounded-[1.5rem] border border-white/15 bg-white/10 p-5 backdrop-blur">
                   <LockKeyhole size={24} className="text-brand-mint" />
-                  <h2 className="mt-4 text-lg font-bold">Separate From Customers</h2>
+                  <h2 className="mt-4 text-lg font-bold">Private Staff Path</h2>
                   <p className="mt-2 text-sm leading-6 text-white/70">
-                    The main website remains focused on customer service requests while staff interests continue through
-                    WhatsApp.
+                    Staff interests are handled on this page so service requests stay focused and simple.
                   </p>
                 </div>
               </div>
