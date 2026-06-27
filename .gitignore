@@ -1,0 +1,13 @@
+.next
+node_modules
+.env
+.env.local
+.env*.local
+firebase-service-account.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.vercel
+.next-dev.log
+.next-dev.err.log
