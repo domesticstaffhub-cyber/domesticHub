@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { MessageCircle } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { ArrowRight, Menu, MessageCircle, X } from "lucide-react";
 import { navLinks } from "@/lib/services";
 
 type SiteHeaderProps = {
@@ -11,36 +13,49 @@ type SiteHeaderProps = {
 };
 
 export function SiteHeader({ onChat, tone = "light" }: SiteHeaderProps) {
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   const isDark = tone === "dark";
 
+  const shellClass = isDark
+    ? "border-white/10 bg-brand-ink/90 text-white"
+    : "border-brand-ink/10 bg-brand-bone/90 text-brand-ink";
+  const mutedClass = isDark ? "text-white/70 hover:text-white" : "text-brand-ink/70 hover:text-brand-ink";
+
+  function isActive(href: string) {
+    if (href === "/") {
+      return pathname === "/";
+    }
+
+    return pathname === href || pathname.startsWith(`${href}/`);
+  }
+
   return (
-    <header
-      className={`fixed left-0 right-0 top-0 z-30 border-b backdrop-blur-xl ${
-        isDark ? "border-white/10 bg-brand-ink/75" : "border-white/40 bg-white/80"
-      }`}
-    >
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:h-20 sm:px-6 lg:px-8">
-        <Link href="/" className={`flex min-w-0 items-center gap-3 ${isDark ? "text-white" : "text-brand-navy"}`}>
+    <header className={`fixed left-0 right-0 top-0 z-40 border-b backdrop-blur-xl ${shellClass}`}>
+      <nav className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        <Link href="/" className="flex min-w-0 items-center gap-3" onClick={() => setOpen(false)}>
           <Image
             src="/images/brand/logo.jpeg"
-            width={52}
-            height={52}
+            width={48}
+            height={48}
             alt="Domestic Staffing Hub logo"
-            className="h-11 w-11 shrink-0 rounded-2xl object-cover sm:h-12 sm:w-12"
+            className="h-10 w-10 shrink-0 border border-current/20 object-cover"
             priority
           />
-          <span className="truncate text-xs font-black uppercase tracking-[0.12em] sm:text-sm lg:text-base">
-            Domestic Staffing Hub
-          </span>
+          <span className="truncate text-sm font-black uppercase tracking-[0.16em]">Domestic Staffing Hub</span>
         </Link>
 
-        <div className="hidden items-center gap-5 lg:flex">
+        <div className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
-              href={link.href.startsWith("#") ? `/${link.href}` : link.href}
-              className={`text-sm font-semibold transition ${
-                isDark ? "text-white/70 hover:text-white" : "text-slate-600 hover:text-brand-blue"
+              href={link.href}
+              className={`px-3 py-2 text-sm font-bold transition ${
+                isActive(link.href)
+                  ? isDark
+                    ? "bg-white text-brand-ink"
+                    : "bg-brand-ink text-brand-bone"
+                  : mutedClass
               }`}
             >
               {link.label}
@@ -49,37 +64,98 @@ export function SiteHeader({ onChat, tone = "light" }: SiteHeaderProps) {
         </div>
 
         <div className="flex items-center gap-2">
-          <Link
-            href="/#about"
-            className={`hidden h-10 items-center rounded-full px-4 text-sm font-bold transition sm:inline-flex lg:hidden ${
-              isDark ? "bg-white/10 text-white hover:bg-white/20" : "bg-brand-blue/10 text-brand-navy hover:bg-brand-blue/15"
-            }`}
-          >
-            About
-          </Link>
           {onChat ? (
             <button
               type="button"
               onClick={onChat}
-              className={`inline-flex h-10 items-center gap-2 rounded-full px-4 text-sm font-bold transition sm:h-11 ${
-                isDark ? "bg-white text-brand-ink hover:bg-brand-gold" : "bg-brand-ink text-white hover:bg-brand-navy"
+              className={`hidden h-11 items-center gap-2 border px-4 text-sm font-black transition sm:inline-flex ${
+                isDark
+                  ? "border-white bg-white text-brand-ink hover:bg-brand-saffron"
+                  : "border-brand-ink bg-brand-ink text-brand-bone hover:bg-brand-clay"
               }`}
             >
               <MessageCircle size={17} />
-              <span className="hidden sm:inline">Chat</span>
+              Chat
             </button>
           ) : (
             <Link
-              href="/#request"
-              className={`inline-flex h-10 items-center gap-2 rounded-full px-4 text-sm font-bold transition sm:h-11 ${
-                isDark ? "bg-white text-brand-ink hover:bg-brand-gold" : "bg-brand-ink text-white hover:bg-brand-navy"
+              href="/contact"
+              className={`hidden h-11 items-center gap-2 border px-4 text-sm font-black transition sm:inline-flex ${
+                isDark
+                  ? "border-white bg-white text-brand-ink hover:bg-brand-saffron"
+                  : "border-brand-ink bg-brand-ink text-brand-bone hover:bg-brand-clay"
               }`}
             >
               Request
+              <ArrowRight size={17} />
             </Link>
           )}
+
+          <button
+            type="button"
+            onClick={() => setOpen((value) => !value)}
+            className={`grid h-11 w-11 place-items-center border transition lg:hidden ${
+              isDark
+                ? "border-white/20 text-white hover:bg-white/10"
+                : "border-brand-ink/20 text-brand-ink hover:bg-brand-ink/5"
+            }`}
+            aria-label={open ? "Close menu" : "Open menu"}
+          >
+            {open ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
       </nav>
+
+      {open ? (
+        <div
+          className={`border-t px-4 py-4 shadow-lift lg:hidden ${
+            isDark ? "border-white/10 bg-brand-ink" : "border-brand-ink/10 bg-brand-bone"
+          }`}
+        >
+          <div className="mx-auto grid max-w-7xl gap-2">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className={`border px-4 py-3 text-sm font-black ${
+                  isActive(link.href)
+                    ? isDark
+                      ? "border-white bg-white text-brand-ink"
+                      : "border-brand-ink bg-brand-ink text-brand-bone"
+                    : isDark
+                      ? "border-white/10 text-white/70"
+                      : "border-brand-ink/10 text-brand-ink/70"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+            {onChat ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false);
+                  onChat();
+                }}
+                className="mt-2 inline-flex h-12 items-center justify-center gap-2 border border-brand-saffron bg-brand-saffron px-4 text-sm font-black text-brand-ink"
+              >
+                <MessageCircle size={17} />
+                Chat on WhatsApp
+              </button>
+            ) : (
+              <Link
+                href="/contact"
+                onClick={() => setOpen(false)}
+                className="mt-2 inline-flex h-12 items-center justify-center gap-2 border border-brand-saffron bg-brand-saffron px-4 text-sm font-black text-brand-ink"
+              >
+                Request staff
+                <ArrowRight size={17} />
+              </Link>
+            )}
+          </div>
+        </div>
+      ) : null}
     </header>
   );
 }

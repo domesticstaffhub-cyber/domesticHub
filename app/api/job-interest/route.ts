@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { contact, createWhatsAppLink, isDemoValue } from "@/lib/contact";
 import { sendNotificationEmail } from "@/lib/email";
 import { saveLead } from "@/lib/firebase-admin";
 import { getClientIp, isRateLimited } from "@/lib/rate-limit";
@@ -38,8 +37,8 @@ export async function POST(request: NextRequest) {
   const category = seekerCategories.find((item) => item.value === parsed.data.serviceType);
   const data = {
     name: sanitizeText(parsed.data.name),
-    email: sanitizeText(parsed.data.email).toLowerCase(),
-    phone: sanitizeText(parsed.data.phone),
+    email: sanitizeText(parsed.data.email) || "Not provided",
+    phone: sanitizeText(parsed.data.phone) || "Not provided",
     serviceType: parsed.data.serviceType,
     serviceLabel: category?.label || parsed.data.serviceType,
     experience: sanitizeText(parsed.data.experience),
@@ -69,15 +68,12 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const whatsappMessage = `Hello, my name is ${data.name}. I am interested in working with Domestic Staffing Hub under ${data.serviceLabel}. My email is ${data.email} and my phone number is ${data.phone}.`;
-
     return NextResponse.json({
       ok: true,
-      demo: !saved.configured || isDemoValue(contact.whatsappNumber),
-      whatsappUrl: createWhatsAppLink(contact.whatsappNumber, whatsappMessage),
+      demo: !saved.configured,
       message: saved.configured
-        ? "Details received. Continue to WhatsApp to complete the work interest conversation."
-        : "Demo mode: details checked successfully. Add live contact settings before launch."
+        ? "Details received. Thank you."
+        : "Demo mode: details checked successfully. Add live database settings before launch."
     });
   } catch (error) {
     console.error("Job interest failed", error);

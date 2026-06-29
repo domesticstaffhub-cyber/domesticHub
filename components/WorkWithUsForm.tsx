@@ -2,7 +2,6 @@
 
 import { FormEvent, useState } from "react";
 import { BriefcaseBusiness, Loader2, Send } from "lucide-react";
-import { DemoDialog } from "@/components/DemoDialog";
 import { seekerCategories } from "@/lib/services";
 import { flattenZodErrors, jobInterestSchema } from "@/lib/validation";
 
@@ -20,8 +19,6 @@ export function WorkWithUsForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formState, setFormState] = useState(initialState);
   const [loading, setLoading] = useState(false);
-  const [demoOpen, setDemoOpen] = useState(false);
-  const [demoMessage, setDemoMessage] = useState("");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -29,10 +26,10 @@ export function WorkWithUsForm() {
     const formData = new FormData(form);
     const payload = {
       name: String(formData.get("name") || ""),
-      email: String(formData.get("email") || ""),
-      phone: String(formData.get("phone") || ""),
+      email: "",
+      phone: "",
       serviceType: String(formData.get("serviceType") || ""),
-      experience: String(formData.get("experience") || ""),
+      experience: "",
       companyWebsite: String(formData.get("companyWebsite") || "")
     };
 
@@ -63,16 +60,6 @@ export function WorkWithUsForm() {
       }
 
       form.reset();
-
-      if (result.demo) {
-        setDemoMessage(
-          "This is using demo contact settings. Add the real WhatsApp number before accepting live staff interest submissions."
-        );
-        setDemoOpen(true);
-      } else {
-        window.open(result.whatsappUrl, "_blank", "noopener,noreferrer");
-      }
-
       setFormState({ status: result.demo ? "error" : "success", message: result.message });
     } catch {
       setFormState({ status: "error", message: "Network error. Please try again." });
@@ -82,101 +69,76 @@ export function WorkWithUsForm() {
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit} className="rounded-[2rem] bg-white p-5 shadow-soft md:p-7">
-        <div className="mb-6 flex items-center gap-3">
-          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-brand-gold/20 text-brand-ink">
-            <BriefcaseBusiness size={22} />
-          </span>
-          <div>
-            <h2 className="text-2xl font-semibold text-brand-ink">Join the staff network</h2>
-            <p className="text-sm text-slate-500">Share your details and continue on WhatsApp.</p>
-          </div>
+    <form onSubmit={handleSubmit} className="border border-brand-ink bg-brand-bone p-4 shadow-hard sm:p-6">
+      <div className="mb-6 flex items-start gap-3 border-b border-brand-line pb-5">
+        <span className="grid h-11 w-11 shrink-0 place-items-center border border-brand-ink bg-brand-saffron text-brand-ink">
+          <BriefcaseBusiness size={22} />
+        </span>
+        <div>
+          <h2 className="text-2xl font-black leading-tight text-brand-ink">Work With Us</h2>
+          <p className="mt-1 text-sm leading-6 text-stone-600">Enter your name and the service you can provide.</p>
         </div>
+      </div>
 
-        <input name="companyWebsite" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+      <input name="companyWebsite" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Name" error={errors.name}>
-            <input name="name" autoComplete="name" placeholder="Your full name" className="field-input" />
-          </Field>
+      <div className="grid gap-4">
+        <Field label="Name" error={errors.name}>
+          <input name="name" autoComplete="name" placeholder="Your full name" className="field-input" />
+        </Field>
 
-          <Field label="Email" error={errors.email}>
-            <input name="email" type="email" autoComplete="email" placeholder="you@example.com" className="field-input" />
-          </Field>
-
-          <Field label="Phone" error={errors.phone}>
-            <input name="phone" autoComplete="tel" placeholder="+234 800 000 0000" className="field-input" />
-          </Field>
-
-          <Field label="Work Category" error={errors.serviceType}>
-            <select name="serviceType" defaultValue="" className="field-input">
-              <option value="" disabled>
-                Select category
+        <Field label="Service You Can Do" error={errors.serviceType}>
+          <select name="serviceType" defaultValue="" className="field-input">
+            <option value="" disabled>
+              Select service
+            </option>
+            {seekerCategories.map((service) => (
+              <option key={service.value} value={service.value}>
+                {service.label}
               </option>
-              {seekerCategories.map((service) => (
-                <option key={service.value} value={service.value}>
-                  {service.label}
-                </option>
-              ))}
-            </select>
-          </Field>
+            ))}
+          </select>
+        </Field>
+      </div>
 
-          <Field label="Experience" error={errors.experience} wide>
-            <textarea
-              name="experience"
-              rows={4}
-              placeholder="Briefly share your experience, availability, and preferred role."
-              className="field-input min-h-32 resize-none py-3"
-            />
-          </Field>
-        </div>
-
-        {formState.message ? (
-          <p
-            className={`mt-4 rounded-2xl px-4 py-3 text-sm font-medium ${
-              formState.status === "success" ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-800"
-            }`}
-          >
-            {formState.message}
-          </p>
-        ) : null}
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="mt-5 inline-flex h-[52px] w-full items-center justify-center gap-2 rounded-full bg-brand-ink px-6 text-sm font-semibold text-white transition hover:bg-brand-navy disabled:cursor-not-allowed disabled:opacity-70"
+      {formState.message ? (
+        <p
+          className={`mt-4 border px-4 py-3 text-sm font-bold ${
+            formState.status === "success"
+              ? "border-brand-teal/30 bg-brand-teal/10 text-brand-teal"
+              : "border-brand-saffron/40 bg-brand-saffron/15 text-brand-ink"
+          }`}
         >
-          {loading ? <Loader2 className="animate-spin" size={18} /> : <Send size={18} />}
-          Continue to WhatsApp
-        </button>
-      </form>
-      <DemoDialog
-        open={demoOpen}
-        title="Demo Submission Path"
-        message={demoMessage}
-        onClose={() => setDemoOpen(false)}
-      />
-    </>
+          {formState.message}
+        </p>
+      ) : null}
+
+      <button
+        type="submit"
+        disabled={loading}
+        className="mt-5 inline-flex h-[52px] w-full items-center justify-center gap-2 border border-brand-ink bg-brand-ink px-6 text-sm font-black text-brand-bone transition hover:bg-brand-clay disabled:opacity-70"
+      >
+        {loading ? <Loader2 className="animate-spin" size={18} /> : <Send size={18} />}
+        Submit
+      </button>
+    </form>
   );
 }
 
 function Field({
   label,
   error,
-  children,
-  wide = false
+  children
 }: {
   label: string;
   error?: string;
   children: React.ReactNode;
-  wide?: boolean;
 }) {
   return (
-    <label className={`grid gap-2 text-sm font-medium text-brand-ink ${wide ? "sm:col-span-2" : ""}`}>
+    <label className="grid gap-2 text-sm font-black text-brand-ink">
       {label}
       {children}
-      {error ? <span className="text-xs font-medium text-red-600">{error}</span> : null}
+      {error ? <span className="text-xs font-bold text-brand-clay">{error}</span> : null}
     </label>
   );
 }

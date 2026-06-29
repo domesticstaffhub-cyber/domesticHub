@@ -1,4 +1,16 @@
-import { BriefcaseBusiness, Car, ChefHat, GraduationCap, HeartHandshake, Home } from "lucide-react";
+import {
+  BriefcaseBusiness,
+  Car,
+  ChefHat,
+  ClipboardCheck,
+  GraduationCap,
+  Handshake,
+  HeartHandshake,
+  Home,
+  MessageCircle,
+  ShieldCheck,
+  UserRoundSearch
+} from "lucide-react";
 
 export const services = [
   {
@@ -10,7 +22,7 @@ export const services = [
       "Enjoy dependable culinary support from chefs selected for skill, hygiene, presentation, and the needs of your home or business.",
     image: "/images/services/chef.jpg",
     imagePosition: "center 38%",
-    accent: "from-brand-gold/35 via-white to-brand-sky/30",
+    color: "brand-clay",
     icon: ChefHat,
     services: [
       "Professional chef placement",
@@ -40,7 +52,7 @@ export const services = [
       "Move with confidence through courteous drivers and chauffeurs matched for safety, discretion, punctuality, and professionalism.",
     image: "/images/services/driver_chauffeur.jpg",
     imagePosition: "center 36%",
-    accent: "from-brand-blue/25 via-white to-brand-mint/25",
+    color: "brand-indigo",
     icon: Car,
     services: [
       "Corporate driver recruitment",
@@ -70,7 +82,7 @@ export const services = [
       "Give learners structured support at home through educators matched to their level, pace, schedule, and learning goals.",
     image: "/images/services/home_tutor.jpg",
     imagePosition: "center 34%",
-    accent: "from-brand-mint/25 via-white to-brand-gold/25",
+    color: "brand-teal",
     icon: GraduationCap,
     services: [
       "Primary and secondary home tutoring",
@@ -100,7 +112,7 @@ export const services = [
       "Bring comfort and order into the home with caring domestic staff selected for reliability, respect, and day-to-day support.",
     image: "/images/services/maid_nanny_caregiver.jpg",
     imagePosition: "center 24%",
-    accent: "from-brand-sky/25 via-white to-brand-gold/20",
+    color: "brand-leaf",
     icon: HeartHandshake,
     services: [
       "Professional maid services",
@@ -130,7 +142,7 @@ export const services = [
       "For household, hospitality, or support needs that do not fit neatly into one category, Domestic Staffing Hub helps you find the right next step.",
     image: "/images/services/general-service.png",
     imagePosition: "center 22%",
-    accent: "from-brand-blue/20 via-white to-brand-gold/20",
+    color: "brand-saffron",
     icon: Home,
     services: [
       "Household support requests",
@@ -144,7 +156,7 @@ export const services = [
       "Responsive team follow-up",
       "Tailored recommendations"
     ],
-    highlights: ["Personal guidance", "Broad support", "Easy request flow"],
+    highlights: ["Personal guidance", "Broad support", "Easy request"],
     audience: "Clients with custom domestic, hospitality, or short-term support needs",
     process: "Share the support you need in plain terms, and the team will help place it under the right service path.",
     assurance: "You get a simpler starting point when the request does not fit neatly into one category."
@@ -156,30 +168,68 @@ export const serviceOptions = services.map((service) => ({
   value: service.slug
 }));
 
-export const seekerCategories = [
-  ...serviceOptions
-] as const;
+export const seekerCategories = [...serviceOptions] as const;
 
 export const stats = [
-  { value: "5", label: "Service paths" },
-  { value: "24h", label: "Prompt follow-up" },
-  { value: "Support team", label: "" }
+  { value: "5", label: "service options" },
+  { value: "24h", label: "follow-up target" },
+  { value: "Warri", label: "local support base" }
 ] as const;
 
 export const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Request", href: "#request" },
-  { label: "Contact", href: "#contact" }
+  { label: "Services", href: "/services" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" }
+] as const;
+
+export const processSteps = [
+  {
+    title: "Request",
+    text: "Send the role, location, timing, and any special preference.",
+    icon: ClipboardCheck
+  },
+  {
+    title: "Match",
+    text: "The team studies the request and guides the best staffing path.",
+    icon: UserRoundSearch
+  },
+  {
+    title: "Confirm",
+    text: "You get clear follow-up before the next step is arranged.",
+    icon: MessageCircle
+  },
+  {
+    title: "Support",
+    text: "You get practical guidance before the next step is arranged.",
+    icon: Handshake
+  }
+] as const;
+
+export const trustSignals = [
+  {
+    title: "Discreet service",
+    text: "Every request is handled with care, privacy, and respect for your home or business.",
+    icon: ShieldCheck
+  },
+  {
+    title: "Practical matching",
+    text: "Each request is considered by role, location, schedule, and household or business context.",
+    icon: UserRoundSearch
+  },
+  {
+    title: "Clear follow-up",
+    text: "Clients can submit details, call, email, or continue through WhatsApp.",
+    icon: MessageCircle
+  }
 ] as const;
 
 export const companyStory = {
   intro:
     "Domestic Staffing Hub connects families, homes, and businesses with reliable domestic support handled with care, discretion, and professionalism.",
   mission:
-    "To make trusted domestic staffing easier for clients by guiding each request with clarity, respect, and dependable follow-up.",
+    "To match selective households with skilled, reliable domestic staff by delivering discreet, efficient and personalized recruitment services that uphold excellence, integrity and respect for both client and staff.",
   vision:
-    "To become a trusted name for domestic support in Warri and beyond, known for quality people, peace of mind, and service that feels personal.",
+    "To be the leading and most trusted domestic staffing hub, recognized for delivering exceptional professionals and setting the benchmark for reliability, professionalism and tailored service.",
   values: ["Trust", "Care", "Professional service", "Peace of mind"]
 } as const;
 
@@ -187,7 +237,7 @@ export const jobSeekerFeature = {
   icon: BriefcaseBusiness,
   title: "Work with Domestic Staffing Hub",
   description:
-    "A private path for professionals who want to offer their skills through the company."
+    "For experienced professionals who want to offer dependable domestic services."
 };
 
 export function getServiceBySlug(slug: string) {
