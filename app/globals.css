@@ -27,14 +27,19 @@ body {
     "Segoe UI",
     sans-serif;
   background: #f5f8ff;
-  color: #12345f;
+  color: #082e8a;
 }
 
-button,
+button {
+  font: inherit;
+}
+
 input,
 textarea,
 select {
   font: inherit;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 button {
@@ -51,38 +56,38 @@ img {
 
 @layer components {
   .field-input {
-    @apply w-full border border-brand-line bg-brand-bone px-3.5 text-brand-ink outline-none transition placeholder:text-stone-400 focus:border-brand-teal focus:bg-white focus:ring-4 focus:ring-brand-teal/15;
+    @apply w-full border border-brand-line bg-brand-bone px-3.5 text-base text-brand-ink outline-none transition placeholder:text-stone-400 focus:border-brand-teal focus:bg-white focus:ring-4 focus:ring-brand-teal/15;
     min-height: 3rem;
     border-radius: 8px;
   }
 
   .section-kicker {
-    @apply text-xs font-black uppercase tracking-[0.2em] text-brand-teal;
+    @apply text-xs font-black uppercase tracking-[0.2em] text-brand-clay;
   }
 }
 
 .surface-grid {
   background-image:
-    linear-gradient(rgba(15, 63, 120, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 63, 120, 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(8, 46, 138, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(8, 46, 138, 0.07) 1px, transparent 1px);
   background-size: 42px 42px;
 }
 
 .dark-grid {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
   background-size: 38px 38px;
 }
 
 .kinetic-strip {
   background-image: repeating-linear-gradient(
     90deg,
-    #0f3f78 0 18px,
+    #082e8a 0 18px,
     #ffffff 18px 30px,
-    #28aee4 30px 45px,
-    #155b96 45px 57px,
-    #dbeafe 57px 69px
+    #1495d3 30px 45px,
+    #061f75 45px 57px,
+    #d9e6f7 57px 69px
   );
   background-size: 138px 100%;
   animation: strip-slide 12s linear infinite;
@@ -93,22 +98,13 @@ img {
 }
 
 .stacked-photo {
-  box-shadow: 10px 10px 0 rgba(15, 63, 120, 0.14);
+  box-shadow: 10px 10px 0 rgba(8, 46, 138, 0.18);
 }
 
 .hero-shade {
   background:
-    linear-gradient(
-      90deg,
-      rgba(15, 63, 120, 0.86) 0%,
-      rgba(21, 91, 150, 0.64) 45%,
-      rgba(21, 91, 150, 0.18) 100%
-    ),
-    linear-gradient(
-      0deg,
-      rgba(15, 63, 120, 0.22),
-      rgba(15, 63, 120, 0.06)
-    );
+    linear-gradient(90deg, rgba(6, 26, 85, 0.94) 0%, rgba(8, 46, 138, 0.78) 45%, rgba(8, 46, 138, 0.24) 100%),
+    linear-gradient(0deg, rgba(6, 26, 85, 0.34), rgba(6, 26, 85, 0.1));
 }
 
 @keyframes strip-slide {
@@ -143,6 +139,6 @@ img {
 }
 
 ::selection {
-  background: rgba(40, 174, 228, 0.25);
-  color: #12345f;
+  background: rgba(43, 183, 240, 0.3);
+  color: #061a55;
 }
