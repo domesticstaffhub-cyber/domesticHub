@@ -10,22 +10,22 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          ink: "#082e8a",
-          coal: "#061a55",
+          ink: "#1f2937",
+          coal: "#12345f",
           paper: "#f5f8ff",
           bone: "#ffffff",
-          clay: "#0b4ea2",
-          teal: "#1495d3",
-          indigo: "#061f75",
-          saffron: "#2bb7f0",
-          leaf: "#4f78bd",
-          line: "#d9e6f7"
+          clay: "#64748b",
+          teal: "#28aee4",
+          indigo: "#0f3f78",
+          saffron: "#38bdf8",
+          leaf: "#5b7fb8",
+          line: "#dbeafe"
         }
       },
       boxShadow: {
-        hard: "10px 10px 0 rgba(8, 46, 138, 0.15)",
-        lift: "0 22px 60px rgba(8, 46, 138, 0.14)",
-        soft: "0 14px 36px rgba(8, 46, 138, 0.09)"
+        hard: "10px 10px 0 rgba(15, 63, 120, 0.12)",
+        lift: "0 22px 60px rgba(15, 63, 120, 0.12)",
+        soft: "0 14px 36px rgba(15, 63, 120, 0.08)"
       }
     }
   },
