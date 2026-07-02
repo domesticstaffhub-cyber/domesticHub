@@ -24,21 +24,21 @@ export default function ServicesPage() {
     <main className="min-h-screen bg-brand-paper text-brand-ink">
       <SiteHeader />
 
-      <section className="surface-grid px-4 pb-14 pt-28 sm:px-6 sm:pt-32 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-          <div>
+      <section className="bg-brand-paper px-4 pb-10 pt-24 sm:px-6 sm:pt-28 lg:px-8">
+        <div className="mx-auto max-w-7xl border-b border-brand-line pb-10">
+          <div className="max-w-3xl">
             <p className="section-kicker">Services</p>
-            <h1 className="mt-3 max-w-3xl text-4xl font-black leading-tight sm:text-5xl">
-              Support for the rooms, routes, and routines that matter.
+            <h1 className="mt-3 text-3xl font-black leading-tight sm:text-4xl">
+              Reliable domestic staff for everyday home and business needs.
             </h1>
+            <p className="mt-4 text-sm leading-7 text-stone-600 sm:text-base">
+              Choose from chefs, drivers, tutors, caregivers, and general domestic support. Each request is handled with care, privacy, and clear follow-up.
+            </p>
           </div>
-          <p className="max-w-2xl text-base leading-8 text-stone-600 lg:justify-self-end">
-            Request one service or describe a custom need. Domestic Staffing Hub helps homes and businesses find the right next step.
-          </p>
         </div>
       </section>
 
-      <section className="bg-brand-bone px-4 py-14 sm:px-6 lg:px-8">
+      <section id="service-list" className="bg-brand-bone px-4 py-14 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-5">
           {services.map((service, index) => {
             const Icon = service.icon;
