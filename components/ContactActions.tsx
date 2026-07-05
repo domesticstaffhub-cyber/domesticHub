@@ -1,19 +1,22 @@
 "use client";
 
 import { Facebook, Instagram, Linkedin, Mail, MessageCircle, Phone } from "lucide-react";
-import { contact, createWhatsAppLink, isDemoValue } from "@/lib/contact";
+import { contact, createEmailLink, createPhoneLink, createWhatsAppLink, isDemoValue } from "@/lib/contact";
 
 export function ContactActions() {
+  const hasPhone = Boolean(contact.phone && !isDemoValue(contact.phone));
   const hasEmail = Boolean(contact.email && !isDemoValue(contact.email));
   const hasLinkedIn = Boolean(contact.socials.linkedin && !isDemoValue(contact.socials.linkedin));
-  const phoneHref = `tel:${contact.phone.replace(/[^\d+]/g, "")}`;
+  const phoneHref = createPhoneLink(contact.phone);
+  const emailHref = createEmailLink(contact.email);
   const whatsappHref = createWhatsAppLink(contact.whatsappNumber, "Hello, I would like to make an enquiry from Domestic Staffing Hub.");
 
   return (
     <div className="flex flex-wrap items-center gap-2">
-      {!isDemoValue(contact.phone) ? (
+      {hasPhone && phoneHref ? (
         <a
           href={phoneHref}
+          aria-label={`Call Domestic Staffing Hub on ${contact.phone}`}
           className="inline-flex h-11 items-center gap-2 border border-white/20 bg-white/10 px-3 text-sm font-black text-white transition hover:border-brand-saffron hover:text-brand-saffron"
         >
           <Phone size={17} />
@@ -33,7 +36,8 @@ export function ContactActions() {
       ) : null}
       {hasEmail ? (
         <a
-          href={`mailto:${contact.email}`}
+          href={emailHref}
+          aria-label={`Email Domestic Staffing Hub at ${contact.email}`}
           className="inline-flex h-11 items-center gap-2 border border-white/20 bg-white/10 px-3 text-sm font-black text-white transition hover:border-brand-saffron hover:text-brand-saffron"
         >
           <Mail size={17} />
