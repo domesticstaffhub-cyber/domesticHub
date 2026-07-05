@@ -1,7 +1,8 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { BriefcaseBusiness, Loader2, Send } from "lucide-react";
+import { BriefcaseBusiness, Send } from "lucide-react";
+import { contact, createWhatsAppLink } from "@/lib/contact";
 import { seekerCategories } from "@/lib/services";
 import { flattenZodErrors, jobInterestSchema } from "@/lib/validation";
 
@@ -18,9 +19,8 @@ const initialState: FormState = {
 export function WorkWithUsForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formState, setFormState] = useState(initialState);
-  const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
@@ -43,29 +43,24 @@ export function WorkWithUsForm() {
 
     setErrors({});
     setFormState(initialState);
-    setLoading(true);
+    const category = seekerCategories.find((item) => item.value === parsed.data.serviceType);
+    const message = [
+      "Hello Domestic Staffing Hub,",
+      "",
+      "I need a job.",
+      "",
+      `Name: ${parsed.data.name}`,
+      `Service I can do: ${category?.label || parsed.data.serviceType}`,
+      "",
+      "Please let me know the next step."
+    ].join("\n");
 
-    try {
-      const response = await fetch("/api/job-interest", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(parsed.data)
-      });
-      const result = await response.json();
-
-      if (!response.ok || !result.ok) {
-        setErrors(result.errors || {});
-        setFormState({ status: "error", message: result.message || "Unable to submit details." });
-        return;
-      }
-
-      form.reset();
-      setFormState({ status: result.demo ? "error" : "success", message: result.message });
-    } catch {
-      setFormState({ status: "error", message: "Network error. Please try again." });
-    } finally {
-      setLoading(false);
-    }
+    window.open(createWhatsAppLink(contact.whatsappNumber, message), "_blank", "noopener,noreferrer");
+    form.reset();
+    setFormState({
+      status: "success",
+      message: "WhatsApp has opened with your details. Please send the message there to continue."
+    });
   }
 
   return (
@@ -75,7 +70,7 @@ export function WorkWithUsForm() {
           <BriefcaseBusiness size={22} />
         </span>
         <div>
-          <h2 className="text-2xl font-black leading-tight text-brand-ink">Work With Us</h2>
+          <h2 className="text-2xl font-black leading-tight text-brand-ink">I Need a Job</h2>
           <p className="mt-1 text-sm leading-6 text-stone-600">Enter your name and the service you can provide.</p>
         </div>
       </div>
@@ -115,11 +110,10 @@ export function WorkWithUsForm() {
 
       <button
         type="submit"
-        disabled={loading}
         className="mt-5 inline-flex h-[52px] w-full items-center justify-center gap-2 border border-brand-ink bg-brand-ink px-6 text-sm font-black text-brand-bone transition hover:bg-brand-clay disabled:opacity-70"
       >
-        {loading ? <Loader2 className="animate-spin" size={18} /> : <Send size={18} />}
-        Submit
+        <Send size={18} />
+        Continue on WhatsApp
       </button>
     </form>
   );

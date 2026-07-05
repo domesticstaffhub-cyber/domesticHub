@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Facebook, Instagram, Linkedin, Mail, Phone } from "lucide-react";
-import { contact, isDemoValue } from "@/lib/contact";
+import { Facebook, Instagram, Linkedin, Mail, MessageCircle, Phone } from "lucide-react";
+import { contact, createWhatsAppLink, isDemoValue } from "@/lib/contact";
 import { DemoDialog } from "./DemoDialog";
 
 type DemoState = {
@@ -19,6 +19,10 @@ const initialDemoState: DemoState = {
 
 export function ContactActions() {
   const [demo, setDemo] = useState(initialDemoState);
+  const hasEmail = Boolean(contact.email && !isDemoValue(contact.email));
+  const hasLinkedIn = Boolean(contact.socials.linkedin && !isDemoValue(contact.socials.linkedin));
+  const phoneHref = `tel:${contact.phone.replace(/[^\d+]/g, "")}`;
+  const whatsappHref = createWhatsAppLink(contact.whatsappNumber, "Hello, I would like to make an enquiry from Domestic Staffing Hub.");
 
   function showDemo(label: string) {
     setDemo({
@@ -42,7 +46,7 @@ export function ContactActions() {
       <div className="flex flex-wrap items-center gap-2">
         <button
           type="button"
-          onClick={() => handleContact("Phone Number", contact.phone, `tel:${contact.phone}`)}
+          onClick={() => handleContact("Phone Number", contact.phone, phoneHref)}
           className="inline-flex h-11 items-center gap-2 border border-white/20 bg-white/10 px-3 text-sm font-black text-white transition hover:border-brand-saffron hover:text-brand-saffron"
         >
           <Phone size={17} />
@@ -50,12 +54,22 @@ export function ContactActions() {
         </button>
         <button
           type="button"
-          onClick={() => handleContact("Email", contact.email, `mailto:${contact.email}`)}
+          onClick={() => handleContact("WhatsApp", contact.whatsappNumber, whatsappHref)}
           className="inline-flex h-11 items-center gap-2 border border-white/20 bg-white/10 px-3 text-sm font-black text-white transition hover:border-brand-saffron hover:text-brand-saffron"
         >
-          <Mail size={17} />
-          Email
+          <MessageCircle size={17} />
+          WhatsApp
         </button>
+        {hasEmail ? (
+          <button
+            type="button"
+            onClick={() => handleContact("Email", contact.email, `mailto:${contact.email}`)}
+            className="inline-flex h-11 items-center gap-2 border border-white/20 bg-white/10 px-3 text-sm font-black text-white transition hover:border-brand-saffron hover:text-brand-saffron"
+          >
+            <Mail size={17} />
+            Email
+          </button>
+        ) : null}
         <button
           type="button"
           onClick={() => handleContact("Instagram", contact.socials.instagram, contact.socials.instagram)}
@@ -72,14 +86,16 @@ export function ContactActions() {
         >
           <Facebook size={18} />
         </button>
-        <button
-          type="button"
-          onClick={() => handleContact("LinkedIn", contact.socials.linkedin, contact.socials.linkedin)}
-          className="grid h-11 w-11 place-items-center border border-white/20 bg-white/10 text-white transition hover:border-brand-saffron hover:text-brand-saffron"
-          aria-label="LinkedIn"
-        >
-          <Linkedin size={18} />
-        </button>
+        {hasLinkedIn ? (
+          <button
+            type="button"
+            onClick={() => handleContact("LinkedIn", contact.socials.linkedin, contact.socials.linkedin)}
+            className="grid h-11 w-11 place-items-center border border-white/20 bg-white/10 text-white transition hover:border-brand-saffron hover:text-brand-saffron"
+            aria-label="LinkedIn"
+          >
+            <Linkedin size={18} />
+          </button>
+        ) : null}
       </div>
       <DemoDialog
         open={demo.open}

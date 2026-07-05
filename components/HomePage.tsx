@@ -15,6 +15,7 @@ import {
   Sparkles
 } from "lucide-react";
 import { ServiceRequestForm } from "@/components/ServiceRequestForm";
+import { GalleryShowcase } from "@/components/GalleryShowcase";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { WhatsAppModal } from "@/components/WhatsAppModal";
@@ -199,6 +200,8 @@ export function HomePage() {
           </div>
         </div>
       </section>
+
+      <GalleryShowcase mode="home" />
 
       <section className="bg-brand-ink px-4 py-16 text-brand-bone sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">

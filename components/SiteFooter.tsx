@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, Mail, MapPin } from "lucide-react";
 import { ContactActions } from "@/components/ContactActions";
+import { contact } from "@/lib/contact";
 import { jobSeekerFeature, navLinks, services } from "@/lib/services";
 
 export function SiteFooter() {
@@ -43,6 +44,13 @@ export function SiteFooter() {
           <div className="mt-5">
             <ContactActions />
           </div>
+          <a
+            href={`mailto:${contact.email}`}
+            className="mt-5 flex gap-3 border border-white/10 bg-white/5 p-4 text-sm font-bold leading-6 text-white/80 transition hover:border-brand-saffron hover:text-brand-saffron"
+          >
+            <Mail size={18} className="mt-1 shrink-0" />
+            <span>{contact.email}</span>
+          </a>
           <div className="mt-5 flex gap-3 border border-white/10 bg-white/5 p-4 text-sm leading-6 text-white/70">
             <MapPin size={18} className="mt-1 shrink-0 text-brand-saffron" />
             <span>17/103, Enerhen Road, Adjacent Faith Victory Church, Warri</span>

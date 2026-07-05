@@ -28,12 +28,14 @@ export const services = [
       "Professional chef placement",
       "Private and home chef services",
       "Restaurant and hotel chef recruitment",
+      "Hospitality support",
       "Event and catering chefs",
       "Pastry and bakery chefs",
       "Temporary and full-time chef staffing"
     ],
     promise: [
       "Private and family chefs",
+      "Hospitality support",
       "Event and catering support",
       "Restaurant and hotel staffing",
       "Temporary or full-time placement"
@@ -85,6 +87,7 @@ export const services = [
     color: "brand-teal",
     icon: GraduationCap,
     services: [
+      "Nursery, kindergarten, and playgroup lessons",
       "Primary and secondary home tutoring",
       "Private lesson services",
       "Exam preparation classes",
@@ -93,6 +96,7 @@ export const services = [
       "Weekend and holiday lessons"
     ],
     promise: [
+      "Nursery and playgroup support",
       "Primary and secondary tutoring",
       "Exam preparation",
       "Homework support",
@@ -178,6 +182,7 @@ export const stats = [
 
 export const navLinks = [
   { label: "Services", href: "/services" },
+  { label: "Gallery", href: "/gallery" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" }
 ] as const;
@@ -227,17 +232,16 @@ export const companyStory = {
   intro:
     "Domestic Staffing Hub connects families, homes, and businesses with reliable domestic support handled with care, discretion, and professionalism.",
   mission:
-    "To match selective households with skilled, reliable domestic staff by delivering discreet, efficient and personalized recruitment services that uphold excellence, integrity and respect for both client and staff.",
+    "To match selective households with skilled, reliable domestic staff by delivering discreet, efficient and personalized recruitment services that uphold excellence, integrity and respect for both client and staff",
   vision:
-    "To be the leading and most trusted domestic staffing hub, recognized for delivering exceptional professionals and setting the benchmark for reliability, professionalism and tailored service.",
+    "To be the leading and most trusted domestic staffing hub, recognized for delivering exceptional professionals and setting the benchmark for reliability, professionalism and tailored service",
   values: ["Trust", "Care", "Professional service", "Peace of mind"]
 } as const;
 
 export const jobSeekerFeature = {
   icon: BriefcaseBusiness,
-  title: "Work with Domestic Staffing Hub",
-  description:
-    "For experienced professionals who want to offer dependable domestic services."
+  title: "I Need a Job",
+  description: "For applicants who can provide dependable domestic services."
 };
 
 export function getServiceBySlug(slug: string) {

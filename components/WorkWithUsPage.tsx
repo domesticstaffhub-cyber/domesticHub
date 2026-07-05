@@ -44,11 +44,11 @@ export function WorkWithUsPage() {
                 <p className="section-kicker">Domestic Staffing Hub</p>
                 <span className="flex w-fit items-center gap-2 border border-brand-ink bg-brand-saffron px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-brand-ink">
                   <BriefcaseBusiness size={15} />
-                  Work With Us
+                  I Need a Job
                 </span>
               </div>
             </div>
-            <h1 className="mt-5 max-w-lg text-4xl font-black leading-tight sm:text-5xl">Submit your service.</h1>
+            <h1 className="mt-5 max-w-lg text-4xl font-black leading-tight sm:text-5xl">I Need a Job.</h1>
             <p className="mt-5 max-w-md text-sm leading-7 text-stone-600">
               Fill this short form with your name and the domestic service you can provide.
             </p>

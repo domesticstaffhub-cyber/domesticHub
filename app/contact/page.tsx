@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { ContactActions } from "@/components/ContactActions";
 import { ServiceRequestForm } from "@/components/ServiceRequestForm";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { contact } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title: "Contact | Domestic Staffing Hub",
@@ -18,14 +19,19 @@ const contactPoints = [
     icon: Phone
   },
   {
-    title: "Email",
-    text: "Send service details or follow-up questions.",
-    icon: Mail
-  },
-  {
     title: "WhatsApp",
     text: "Continue a quick service conversation.",
     icon: MessageCircle
+  },
+  {
+    title: "Email",
+    text: contact.email,
+    icon: Mail
+  },
+  {
+    title: "Social media",
+    text: "Follow updates and reach the team online.",
+    icon: Instagram
   }
 ] as const;
 
@@ -73,7 +79,7 @@ export default function ContactPage() {
               <ContactActions />
             </div>
           </div>
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {contactPoints.map((point) => {
               const Icon = point.icon;
 

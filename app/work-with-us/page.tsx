@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { WorkWithUsPage } from "@/components/WorkWithUsPage";
 
 export const metadata: Metadata = {
-  title: "Work With Us | Domestic Staffing Hub",
-  description: "Apply to offer domestic services through Domestic Staffing Hub."
+  title: "I Need a Job | Domestic Staffing Hub",
+  description: "Submit your name and the domestic service you can provide."
 };
 
 export default function Page() {
