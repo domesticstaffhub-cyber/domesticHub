@@ -1,14 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 import { ContactActions } from "@/components/ContactActions";
-import { contact, createEmailLink, createPhoneLink } from "@/lib/contact";
 import { jobSeekerFeature, navLinks, services } from "@/lib/services";
 
 export function SiteFooter() {
-  const phoneHref = createPhoneLink(contact.phone);
-  const emailHref = createEmailLink(contact.email);
-
   return (
     <footer className="bg-brand-ink px-4 py-12 text-brand-bone sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.1fr_0.9fr_0.7fr]">
@@ -47,22 +43,6 @@ export function SiteFooter() {
           <div className="mt-5">
             <ContactActions />
           </div>
-          <a
-            href={phoneHref}
-            aria-label={`Call Domestic Staffing Hub on ${contact.phone}`}
-            className="mt-5 flex gap-3 border border-white/10 bg-white/5 p-4 text-sm font-bold leading-6 text-white/80 transition hover:border-brand-saffron hover:text-brand-saffron"
-          >
-            <Phone size={18} className="mt-1 shrink-0" />
-            <span>{contact.phone}</span>
-          </a>
-          <a
-            href={emailHref}
-            aria-label={`Email Domestic Staffing Hub at ${contact.email}`}
-            className="mt-3 flex min-w-0 gap-3 border border-white/10 bg-white/5 p-4 text-sm font-bold leading-6 text-white/80 transition hover:border-brand-saffron hover:text-brand-saffron"
-          >
-            <Mail size={18} className="mt-1 shrink-0" />
-            <span className="break-all">{contact.email}</span>
-          </a>
           <div className="mt-5 flex gap-3 border border-white/10 bg-white/5 p-4 text-sm leading-6 text-white/70">
             <MapPin size={18} className="mt-1 shrink-0 text-brand-saffron" />
             <span>17/103, Enerhen Road, Adjacent Faith Victory Church, Warri</span>
