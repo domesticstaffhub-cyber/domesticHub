@@ -26,7 +26,8 @@ const contactPoints = [
   {
     title: "Email",
     text: contact.email,
-    icon: Mail
+    icon: Mail,
+    compact: true
   },
   {
     title: "Social media",
@@ -84,10 +85,16 @@ export default function ContactPage() {
               const Icon = point.icon;
 
               return (
-                <div key={point.title} className="border border-white/10 bg-white/5 p-5">
+                <div key={point.title} className="min-w-0 border border-white/10 bg-white/5 p-5">
                   <Icon size={24} className="text-brand-saffron" />
                   <h3 className="mt-5 text-lg font-black">{point.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-white/70">{point.text}</p>
+                  <p
+                    className={`mt-3 leading-7 text-white/70 ${
+                      "compact" in point && point.compact ? "break-all text-[13px]" : "text-sm"
+                    }`}
+                  >
+                    {point.text}
+                  </p>
                 </div>
               );
             })}

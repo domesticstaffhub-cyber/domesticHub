@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Mail, MapPin } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { ContactActions } from "@/components/ContactActions";
 import { contact } from "@/lib/contact";
 import { jobSeekerFeature, navLinks, services } from "@/lib/services";
@@ -45,11 +45,18 @@ export function SiteFooter() {
             <ContactActions />
           </div>
           <a
-            href={`mailto:${contact.email}`}
+            href={`tel:${contact.phone.replace(/[^\d+]/g, "")}`}
             className="mt-5 flex gap-3 border border-white/10 bg-white/5 p-4 text-sm font-bold leading-6 text-white/80 transition hover:border-brand-saffron hover:text-brand-saffron"
           >
+            <Phone size={18} className="mt-1 shrink-0" />
+            <span>{contact.phone}</span>
+          </a>
+          <a
+            href={`mailto:${contact.email}`}
+            className="mt-3 flex min-w-0 gap-3 border border-white/10 bg-white/5 p-4 text-sm font-bold leading-6 text-white/80 transition hover:border-brand-saffron hover:text-brand-saffron"
+          >
             <Mail size={18} className="mt-1 shrink-0" />
-            <span>{contact.email}</span>
+            <span className="break-all">{contact.email}</span>
           </a>
           <div className="mt-5 flex gap-3 border border-white/10 bg-white/5 p-4 text-sm leading-6 text-white/70">
             <MapPin size={18} className="mt-1 shrink-0 text-brand-saffron" />

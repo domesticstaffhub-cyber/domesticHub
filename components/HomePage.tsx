@@ -71,7 +71,7 @@ export function HomePage() {
           >
             <span className="inline-flex items-center gap-2 border border-white/20 bg-white/10 px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-white backdrop-blur">
               <Sparkles size={15} />
-              Domestic staffing for Warri homes and businesses
+              Domestic staffing for homes and business
             </span>
             <h1 className="mt-6 max-w-5xl text-4xl font-black leading-tight text-white sm:text-5xl">
               Trusted staff for the way your home works.

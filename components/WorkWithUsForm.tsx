@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { BriefcaseBusiness, Send } from "lucide-react";
 import { contact, createWhatsAppLink } from "@/lib/contact";
 import { seekerCategories } from "@/lib/services";
@@ -19,6 +19,16 @@ const initialState: FormState = {
 export function WorkWithUsForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formState, setFormState] = useState(initialState);
+
+  useEffect(() => {
+    if (!formState.message) return;
+
+    const timer = window.setTimeout(() => {
+      setFormState(initialState);
+    }, 3000);
+
+    return () => window.clearTimeout(timer);
+  }, [formState.message]);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -59,7 +69,7 @@ export function WorkWithUsForm() {
     form.reset();
     setFormState({
       status: "success",
-      message: "WhatsApp has opened with your details. Please send the message there to continue."
+      message: "Your job request message is ready on WhatsApp. Please send it to continue."
     });
   }
 
