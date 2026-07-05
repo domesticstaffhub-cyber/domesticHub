@@ -52,17 +52,14 @@ export async function POST(request: NextRequest) {
 
     try {
       const email = await sendNotificationEmail({
-        subject: `New service request: ${data.serviceLabel}`,
+        subject: "New service request",
         replyTo: data.email,
         html: buildNotificationEmail({
           eyebrow: "Service request",
-          title: `New service request: ${data.serviceLabel}`,
+          title: "New service request",
           intro: "A new customer request has been submitted from the website. Review the details below and follow up with the client.",
           summaryLabel: "Service needed",
           summaryValue: data.serviceLabel,
-          replyEmail: data.email,
-          phone: data.phone,
-          leadId: saved.id,
           details: [
             { label: "Name", value: data.name },
             { label: "Email", value: data.email },
@@ -78,8 +75,7 @@ export async function POST(request: NextRequest) {
           `Email: ${data.email}`,
           `Phone: ${data.phone || "Not provided"}`,
           `Service: ${data.serviceLabel}`,
-          `Message: ${data.message || "Not provided"}`,
-          `Lead ID: ${saved.id}`
+          `Message: ${data.message || "Not provided"}`
         ].join("\n")
       });
       emailSent = email.sent;

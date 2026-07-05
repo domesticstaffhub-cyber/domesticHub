@@ -59,9 +59,6 @@ export async function POST(request: NextRequest) {
             intro: "A potential staff member submitted interest from the website. Review the profile below and continue the screening process.",
             summaryLabel: "Work category",
             summaryValue: data.serviceLabel,
-            replyEmail: data.email === "Not provided" ? undefined : data.email,
-            phone: data.phone === "Not provided" ? undefined : data.phone,
-            leadId: saved.id,
             details: [
               { label: "Name", value: data.name },
               { label: "Email", value: data.email },
@@ -77,8 +74,7 @@ export async function POST(request: NextRequest) {
             `Email: ${data.email}`,
             `Phone: ${data.phone}`,
             `Work Category: ${data.serviceLabel}`,
-            `Experience: ${data.experience || "Not provided"}`,
-            `Lead ID: ${saved.id}`
+            `Experience: ${data.experience || "Not provided"}`
           ].join("\n")
         });
       } catch (emailError) {

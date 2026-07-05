@@ -11,9 +11,6 @@ type NotificationEmailInput = {
   summaryValue: string;
   details: Detail[];
   message?: string;
-  leadId?: string;
-  replyEmail?: string;
-  phone?: string;
 };
 
 const colors = {
@@ -53,22 +50,7 @@ function buildDetailRows(details: Detail[]) {
     .join("");
 }
 
-function actionButton(href: string, label: string, filled = false) {
-  return `
-    <a href="${href}" style="display: inline-block; margin: 0 8px 10px 0; padding: 13px 18px; border: 1px solid ${filled ? colors.coal : colors.line}; background: ${filled ? colors.coal : colors.bone}; color: ${filled ? colors.bone : colors.coal}; font-size: 13px; font-weight: 900; line-height: 16px; text-decoration: none;">
-      ${escapeHtml(label)}
-    </a>
-  `;
-}
-
 export function buildNotificationEmail(input: NotificationEmailInput) {
-  const replySubject = encodeURIComponent(input.title);
-  const replyBody = encodeURIComponent(`Hello ${input.details.find((item) => item.label === "Name")?.value || ""},`);
-  const replyButton = input.replyEmail
-    ? actionButton(`mailto:${encodeURIComponent(input.replyEmail)}?subject=${replySubject}&body=${replyBody}`, "Reply by email", true)
-    : "";
-  const callButton = input.phone ? actionButton(`tel:${input.phone.replace(/[^\d+]/g, "")}`, "Call client") : "";
-
   return `
 <!doctype html>
 <html>
@@ -142,10 +124,6 @@ export function buildNotificationEmail(input: NotificationEmailInput) {
                     : ""
                 }
 
-                <div style="margin-top: 24px;">
-                  ${replyButton}
-                  ${callButton}
-                </div>
               </td>
             </tr>
 
@@ -154,7 +132,7 @@ export function buildNotificationEmail(input: NotificationEmailInput) {
                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                   <tr>
                     <td style="color: ${colors.muted}; font-size: 12px; line-height: 18px;">
-                      ${input.leadId ? `Lead ID: <strong style="color: ${colors.ink};">${escapeHtml(input.leadId)}</strong>` : "Domestic Staffing Hub website notification"}
+                      Domestic Staffing Hub website notification
                     </td>
                     <td align="right" style="color: ${colors.muted}; font-size: 12px; line-height: 18px;">
                       Sent from website form

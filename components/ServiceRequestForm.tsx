@@ -125,7 +125,7 @@ export function ServiceRequestForm() {
           <textarea
             name="message"
             rows={4}
-            placeholder="Role, location, schedule, living arrangement, and any special requirement."
+            placeholder="Location, schedule, living arrangement, and any special requirement."
             className="field-input min-h-32 resize-none py-3"
           />
         </Field>
