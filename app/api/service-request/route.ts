@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendNotificationEmail } from "@/lib/email";
+import { buildNotificationEmail } from "@/lib/email-template";
 import { saveLead } from "@/lib/firebase-admin";
 import { getClientIp, isRateLimited } from "@/lib/rate-limit";
 import { serviceOptions } from "@/lib/services";
@@ -53,6 +54,23 @@ export async function POST(request: NextRequest) {
       const email = await sendNotificationEmail({
         subject: `New service request: ${data.serviceLabel}`,
         replyTo: data.email,
+        html: buildNotificationEmail({
+          eyebrow: "Service request",
+          title: `New service request: ${data.serviceLabel}`,
+          intro: "A new customer request has been submitted from the website. Review the details below and follow up with the client.",
+          summaryLabel: "Service needed",
+          summaryValue: data.serviceLabel,
+          replyEmail: data.email,
+          phone: data.phone,
+          leadId: saved.id,
+          details: [
+            { label: "Name", value: data.name },
+            { label: "Email", value: data.email },
+            { label: "Phone", value: data.phone || "Not provided" },
+            { label: "Service", value: data.serviceLabel }
+          ],
+          message: data.message || "Not provided"
+        }),
         text: [
           "A new customer service request was submitted.",
           "",

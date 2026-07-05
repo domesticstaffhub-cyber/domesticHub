@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendNotificationEmail } from "@/lib/email";
+import { buildNotificationEmail } from "@/lib/email-template";
 import { saveLead } from "@/lib/firebase-admin";
 import { getClientIp, isRateLimited } from "@/lib/rate-limit";
 import { seekerCategories } from "@/lib/services";
@@ -52,6 +53,23 @@ export async function POST(request: NextRequest) {
       try {
         await sendNotificationEmail({
           subject: `New work interest: ${data.serviceLabel}`,
+          html: buildNotificationEmail({
+            eyebrow: "Work interest",
+            title: `New work interest: ${data.serviceLabel}`,
+            intro: "A potential staff member submitted interest from the website. Review the profile below and continue the screening process.",
+            summaryLabel: "Work category",
+            summaryValue: data.serviceLabel,
+            replyEmail: data.email === "Not provided" ? undefined : data.email,
+            phone: data.phone === "Not provided" ? undefined : data.phone,
+            leadId: saved.id,
+            details: [
+              { label: "Name", value: data.name },
+              { label: "Email", value: data.email },
+              { label: "Phone", value: data.phone },
+              { label: "Category", value: data.serviceLabel }
+            ],
+            message: data.experience || "Not provided"
+          }),
           text: [
             "A potential staff member submitted interest.",
             "",
