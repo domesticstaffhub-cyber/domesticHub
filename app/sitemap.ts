@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { services } from "@/lib/services";
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://domesticstaffinghub.com").replace(/\/$/, "");
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.domesticstaffinghub.com").replace(/\/$/, "");
 
 const publicRoutes = [
   { path: "", priority: 1, changeFrequency: "weekly" },
