@@ -39,7 +39,7 @@ type Notice = {
 type ActiveTab = "library" | "add";
 type ItemModalMode = "view" | "edit";
 
-const categories = ["Live picture", "Chef", "Driver", "Home Tutor", "Caregiver", "Hospitality", "General Service"];
+const categories = ["Chef", "Driver", "Home Tutor", "Caregiver", "Hospitality", "General Service"];
 
 function noticeClass(tone: Notice["tone"]) {
   if (tone === "success") return "border-brand-teal/30 bg-brand-teal/10 text-brand-teal";
@@ -186,6 +186,16 @@ export function GalleryCmsApp() {
   useEffect(() => {
     loadGallery();
   }, []);
+
+  useEffect(() => {
+    if (!notice) return;
+
+    const timer = window.setTimeout(() => {
+      setNotice(null);
+    }, 4000);
+
+    return () => window.clearTimeout(timer);
+  }, [notice]);
 
   async function handleLogin(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -529,7 +539,10 @@ export function GalleryCmsApp() {
                 </label>
                 <label className="grid gap-2 text-sm font-black">
                   Category
-                  <select name="category" defaultValue="Live picture" className="field-input">
+                  <select name="category" defaultValue="" className="field-input">
+                    <option value="" disabled>
+                      Select category
+                    </option>
                     {categories.map((category) => (
                       <option key={category} value={category}>
                         {category}
@@ -679,6 +692,9 @@ export function GalleryCmsApp() {
                   <label className="grid gap-2 text-sm font-black">
                     Category
                     <select name="category" defaultValue={selectedItem.category} className="field-input">
+                      {!categories.includes(selectedItem.category) ? (
+                        <option value={selectedItem.category}>{selectedItem.category}</option>
+                      ) : null}
                       {categories.map((category) => (
                         <option key={category} value={category}>
                           {category}
