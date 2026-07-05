@@ -23,6 +23,29 @@ export function isDemoValue(value: string) {
   return demoContactValues.has(value);
 }
 
+export function createPhoneLink(number: string) {
+  const digits = number.replace(/[^\d]/g, "");
+
+  if (!digits) {
+    return "";
+  }
+
+  const international = digits.startsWith("234")
+    ? `+${digits}`
+    : digits.startsWith("0")
+      ? `+234${digits.slice(1)}`
+      : `+${digits}`;
+
+  return `tel:${international}`;
+}
+
+export function createEmailLink(email: string) {
+  const subject = encodeURIComponent("Domestic Staffing Hub enquiry");
+  const body = encodeURIComponent("Hello Domestic Staffing Hub,\n\n");
+
+  return `mailto:${email}?subject=${subject}&body=${body}`;
+}
+
 export function createWhatsAppLink(number: string, message: string) {
   const normalized = number.replace(/[^\d]/g, "");
   return `https://wa.me/${normalized}?text=${encodeURIComponent(message)}`;
