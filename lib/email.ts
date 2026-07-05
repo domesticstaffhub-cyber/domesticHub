@@ -3,6 +3,7 @@ import nodemailer from "nodemailer";
 type EmailPayload = {
   subject: string;
   text: string;
+  html?: string;
   replyTo?: string;
 };
 
@@ -48,7 +49,8 @@ export async function sendNotificationEmail(payload: EmailPayload) {
     to: config.to,
     replyTo: payload.replyTo || config.user,
     subject: payload.subject,
-    text: payload.text
+    text: payload.text,
+    html: payload.html
   });
 
   return { sent: true };
