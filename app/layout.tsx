@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.domesticstaffinghub.com").replace(/\/$/, "");
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://domesticstaffinghub.com"),
+  metadataBase: new URL(siteUrl),
   title: "Domestic Staffing Hub | Trusted Domestic Staffing",
   description:
     "Request trusted chefs, drivers, home tutors, maids, nannies, caregivers, and domestic support staff.",
