@@ -192,7 +192,7 @@ export function GalleryCmsApp() {
 
     const timer = window.setTimeout(() => {
       setNotice(null);
-    }, 4000);
+    }, 3000);
 
     return () => window.clearTimeout(timer);
   }, [notice]);

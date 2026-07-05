@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://domesticstaffinghub.com"),
   title: "Domestic Staffing Hub | Trusted Domestic Staffing",
   description:
     "Request trusted chefs, drivers, home tutors, maids, nannies, caregivers, and domestic support staff.",
@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Domestic Staffing Hub",
     description: "Trusted domestic staffing for homes, families, restaurants, hotels, and businesses.",
+    url: "/",
+    siteName: "Domestic Staffing Hub",
     images: ["/images/brand/logo.jpeg"]
   }
 };
