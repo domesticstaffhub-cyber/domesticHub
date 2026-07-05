@@ -40,15 +40,14 @@ export function WhatsAppModal({ open, onClose, initialService }: WhatsAppModalPr
     setErrors({});
 
     const service = serviceOptions.find((item) => item.value === parsed.data.serviceType);
+    const serviceLabel = service?.label || "domestic staffing";
+    const serviceText = serviceLabel.toLowerCase().includes("service") ? serviceLabel : `${serviceLabel} service`;
     const message = [
       "Hello Domestic Staffing Hub,",
       "",
-      "I want to request a service.",
+      `My name is ${parsed.data.name}, and I would like to enquire about your ${serviceText}.`,
       "",
-      `Name: ${parsed.data.name}`,
-      `Service Needed: ${service?.label || "A service"}`,
-      "",
-      "Please share the next step."
+      "Thank you."
     ].join("\n");
 
     if (isDemoValue(contact.whatsappNumber)) {

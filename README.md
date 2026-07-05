@@ -79,7 +79,7 @@ The website avoids unnecessary write-ups and keeps the important content direct.
 
 ## Key Pages
 
-- **Home:** Introduces the brand, services, gallery preview, and main actions.
+- **Home:** Introduces the brand, services, trust signals, and main actions.
 - **About:** Shares the company story, mission, and vision.
 - **Services:** Displays the domestic and business support categories.
 - **Service Details:** Gives each service its own focused page.

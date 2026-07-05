@@ -7,7 +7,7 @@ const ADMIN_DOC_ID = "primaryAdmin";
 const ADMIN_COLLECTION = "adminSettings";
 const SESSION_HOURS = 8;
 
-export const adminRoute = "/admin-center";
+export const adminRoute = "/center/staff";
 export const adminCookieName = "dsh_admin_session";
 export const defaultAdminUsername = process.env.ADMIN_DEFAULT_USERNAME || "Admin";
 export const defaultAdminPassword = process.env.ADMIN_DEFAULT_PASSWORD || "DomStaffHub!2026";
