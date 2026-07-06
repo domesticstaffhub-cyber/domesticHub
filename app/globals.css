@@ -13,10 +13,6 @@
   box-sizing: border-box;
 }
 
-html {
-  background: #f5f8ff;
-}
-
 body {
   margin: 0;
   min-height: 100vh;
@@ -28,20 +24,14 @@ body {
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
-  background: #f5f8ff;
-  color: #082e8a;
+  background: #f7fbff;
 }
 
-button {
-  font: inherit;
-}
-
+button,
 input,
 textarea,
 select {
   font: inherit;
-  font-size: 16px;
-  line-height: 1.5;
 }
 
 input,
@@ -75,89 +65,34 @@ img {
 
 @layer components {
   .field-input {
-    @apply w-full border border-brand-line bg-brand-bone px-3.5 text-base text-brand-ink outline-none transition placeholder:text-stone-400 focus:border-brand-teal focus:bg-white focus:ring-4 focus:ring-brand-teal/15;
+    @apply w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-brand-ink outline-none transition placeholder:text-slate-400 focus:border-brand-blue focus:bg-white focus:ring-4 focus:ring-brand-sky/15;
     min-height: 3rem;
-    border-radius: 8px;
   }
 
   .section-kicker {
     @apply text-xs font-black uppercase tracking-[0.2em] text-brand-clay;
   }
-
-  .section-kicker {
-    @apply text-xs font-black uppercase tracking-[0.2em] text-brand-clay;
-  }
 }
 
-.surface-grid {
-  background-image:
-    linear-gradient(rgba(8, 46, 138, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(8, 46, 138, 0.07) 1px, transparent 1px);
-  background-size: 42px 42px;
+.hero-collage {
+  position: absolute;
+  inset: -8% -6% -10% 42%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  opacity: 0.46;
+  transform: rotate(-5deg);
 }
 
-.dark-grid {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 38px 38px;
+.hero-collage > div:nth-child(1),
+.hero-collage > div:nth-child(4) {
+  transform: translateY(2.5rem);
 }
 
-.kinetic-strip {
-  background-image: repeating-linear-gradient(
-    90deg,
-    #082e8a 0 18px,
-    #ffffff 18px 30px,
-    #1495d3 30px 45px,
-    #061f75 45px 57px,
-    #d9e6f7 57px 69px
-  );
-  background-size: 138px 100%;
-  animation: strip-slide 12s linear infinite;
-}
-
-.marquee-track {
-  animation: marquee 26s linear infinite;
-}
-
-.stacked-photo {
-  box-shadow: 10px 10px 0 rgba(8, 46, 138, 0.18);
-}
-
-.hero-shade {
-  background:
-    linear-gradient(90deg, rgba(6, 26, 85, 0.94) 0%, rgba(8, 46, 138, 0.78) 45%, rgba(8, 46, 138, 0.24) 100%),
-    linear-gradient(0deg, rgba(6, 26, 85, 0.34), rgba(6, 26, 85, 0.1));
-}
-
-@keyframes strip-slide {
-  from {
-    background-position: 0 0;
-  }
-
-  to {
-    background-position: 138px 0;
-  }
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-    transition-duration: 0.001ms !important;
+@media (max-width: 900px) {
+  .hero-collage {
+    inset: 8% -30% 0 10%;
+    opacity: 0.28;
   }
 }
 
@@ -203,6 +138,6 @@ img {
 }
 
 ::selection {
-  background: rgba(43, 183, 240, 0.3);
-  color: #061a55;
+  background: rgba(244, 182, 63, 0.42);
+  color: #102037;
 }

@@ -7,23 +7,21 @@ const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.domesticstaffi
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Domestic Staffing Hub | Trusted Domestic Staffing",
+  title: "Domestic Staffing Hub | Verified Domestic Staff",
   description:
-    "Request trusted chefs, drivers, home tutors, maids, nannies, caregivers, and domestic support staff.",
+    "Request verified chefs, drivers, home tutors, maids, nannies, caregivers, and domestic support staff.",
   icons: {
     icon: "/favicon.ico"
   },
   openGraph: {
     title: "Domestic Staffing Hub",
-    description: "Trusted domestic staffing for homes, families, restaurants, hotels, and businesses.",
-    url: "/",
-    siteName: "Domestic Staffing Hub",
+    description: "Verified domestic staffing for homes, families, restaurants, hotels, and businesses.",
     images: ["/images/brand/logo.jpeg"]
   }
 };
 
 export const viewport: Viewport = {
-  themeColor: "#082e8a",
+  themeColor: "#102037",
   width: "device-width",
   initialScale: 1
 };

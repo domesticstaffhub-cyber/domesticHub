@@ -5,7 +5,7 @@ import { sanitizeText } from "@/lib/validation";
 
 export const runtime = "nodejs";
 
-const maxImageDataLength = 850_000;
+const maxImageDataLength = 560_000;
 
 function isValidImageData(value: string) {
   return /^data:image\/(jpeg|jpg|png|webp);base64,/.test(value) && value.length <= maxImageDataLength;
@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
   }
 
   if (!isValidImageData(imageData)) {
-    return NextResponse.json({ ok: false, message: "Upload a compressed JPG, PNG, or WebP image under 850KB." }, { status: 400 });
+    return NextResponse.json({ ok: false, message: "Upload a compressed JPG, PNG, or WebP image under 550KB." }, { status: 400 });
   }
 
   try {

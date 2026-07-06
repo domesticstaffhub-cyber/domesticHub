@@ -3,7 +3,7 @@ import { WorkWithUsPage } from "@/components/WorkWithUsPage";
 
 export const metadata: Metadata = {
   title: "I Need a Job | Domestic Staffing Hub",
-  description: "Submit your name and the domestic service you can provide.",
+  description: "Send a job request to work with Domestic Staffing Hub as domestic support staff.",
   robots: {
     index: false,
     follow: false

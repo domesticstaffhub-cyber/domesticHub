@@ -1,8 +1,8 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { BriefcaseBusiness, Send } from "lucide-react";
-import { contact, createWhatsAppLink } from "@/lib/contact";
+import { Send } from "lucide-react";
+import { contact, createWhatsAppLink, isDemoValue } from "@/lib/contact";
 import { seekerCategories } from "@/lib/services";
 import { flattenZodErrors, jobInterestSchema } from "@/lib/validation";
 
@@ -36,10 +36,7 @@ export function WorkWithUsForm() {
     const formData = new FormData(form);
     const payload = {
       name: String(formData.get("name") || ""),
-      email: "",
-      phone: "",
       serviceType: String(formData.get("serviceType") || ""),
-      experience: "",
       companyWebsite: String(formData.get("companyWebsite") || "")
     };
 
@@ -51,43 +48,35 @@ export function WorkWithUsForm() {
       return;
     }
 
-    setErrors({});
-    setFormState(initialState);
     const category = seekerCategories.find((item) => item.value === parsed.data.serviceType);
-    const message = [
+    const categoryLabel = category?.label || "domestic staffing";
+
+    if (isDemoValue(contact.whatsappNumber)) {
+      setFormState({ status: "error", message: "WhatsApp number is not ready yet." });
+      return;
+    }
+
+    const whatsappMessage = [
       "Hello Domestic Staffing Hub,",
       "",
-      "I need a job.",
+      `My name is ${parsed.data.name}, and I need a job with Domestic Staffing Hub. I can provide ${categoryLabel} services.`,
       "",
-      `Name: ${parsed.data.name}`,
-      `Service I can do: ${category?.label || parsed.data.serviceType}`,
-      "",
-      "Please let me know the next step."
+      "Thank you."
     ].join("\n");
 
-    window.open(createWhatsAppLink(contact.whatsappNumber, message), "_blank", "noopener,noreferrer");
+    setErrors({});
     form.reset();
-    setFormState({
-      status: "success",
-      message: "Your job request message is ready on WhatsApp. Please send it to continue."
-    });
+    window.open(createWhatsAppLink(contact.whatsappNumber, whatsappMessage), "_blank", "noopener,noreferrer");
+    setFormState({ status: "success", message: "WhatsApp has opened with your details. Please send the message there to continue." });
   }
 
   return (
-    <form onSubmit={handleSubmit} className="border border-brand-ink bg-brand-bone p-4 shadow-hard sm:p-6">
-      <div className="mb-6 flex items-start gap-3 border-b border-brand-line pb-5">
-        <span className="grid h-11 w-11 shrink-0 place-items-center border border-brand-ink bg-brand-saffron text-brand-ink">
-          <BriefcaseBusiness size={22} />
-        </span>
-        <div>
-          <h2 className="text-2xl font-black leading-tight text-brand-ink">I Need a Job</h2>
-          <p className="mt-1 text-sm leading-6 text-stone-600">Enter your name and the service you can provide.</p>
-        </div>
-      </div>
+    <form onSubmit={handleSubmit} className="rounded-[2rem] bg-white p-5 shadow-soft md:p-7">
+      <p className="mb-6 text-sm leading-6 text-slate-500">Enter your name and choose the service you can do.</p>
 
       <input name="companyWebsite" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
 
-      <div className="grid gap-4">
+      <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Name" error={errors.name}>
           <input name="name" autoComplete="name" placeholder="Your full name" className="field-input" />
         </Field>
@@ -95,7 +84,7 @@ export function WorkWithUsForm() {
         <Field label="Service You Can Do" error={errors.serviceType}>
           <select name="serviceType" defaultValue="" className="field-input">
             <option value="" disabled>
-              Select service
+              Select category
             </option>
             {seekerCategories.map((service) => (
               <option key={service.value} value={service.value}>
@@ -108,10 +97,8 @@ export function WorkWithUsForm() {
 
       {formState.message ? (
         <p
-          className={`mt-4 border px-4 py-3 text-sm font-bold ${
-            formState.status === "success"
-              ? "border-brand-teal/30 bg-brand-teal/10 text-brand-teal"
-              : "border-brand-saffron/40 bg-brand-saffron/15 text-brand-ink"
+          className={`mt-4 rounded-2xl px-4 py-3 text-sm font-medium ${
+            formState.status === "success" ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-800"
           }`}
         >
           {formState.message}
@@ -120,10 +107,10 @@ export function WorkWithUsForm() {
 
       <button
         type="submit"
-        className="mt-5 inline-flex h-[52px] w-full items-center justify-center gap-2 border border-brand-ink bg-brand-ink px-6 text-sm font-black text-brand-bone transition hover:bg-brand-clay disabled:opacity-70"
+        className="mt-5 inline-flex h-[52px] w-full items-center justify-center gap-2 rounded-full bg-brand-ink px-6 text-sm font-semibold text-white transition hover:bg-brand-navy"
       >
         <Send size={18} />
-        Continue on WhatsApp
+        Send Job Request
       </button>
     </form>
   );
@@ -139,10 +126,10 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <label className="grid gap-2 text-sm font-black text-brand-ink">
+    <label className="grid gap-2 text-sm font-medium text-brand-ink">
       {label}
       {children}
-      {error ? <span className="text-xs font-bold text-brand-clay">{error}</span> : null}
+      {error ? <span className="text-xs font-medium text-red-600">{error}</span> : null}
     </label>
   );
 }
