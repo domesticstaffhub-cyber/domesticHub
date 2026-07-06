@@ -15,10 +15,21 @@ const config: Config = {
           sky: "#49b7f5",
           ink: "#102037",
           mint: "#2bbf8a",
-          gold: "#f4b63f"
+          gold: "#f4b63f",
+          coal: "#12345f",
+          paper: "#f5f8ff",
+          bone: "#ffffff",
+          clay: "#64748b",
+          teal: "#28aee4",
+          indigo: "#0f3f78",
+          saffron: "#38bdf8",
+          leaf: "#5b7fb8",
+          line: "#dbeafe"
         }
       },
       boxShadow: {
+        hard: "10px 10px 0 rgba(15, 63, 120, 0.12)",
+        lift: "0 22px 60px rgba(15, 63, 120, 0.12)",
         glow: "0 24px 80px rgba(31, 126, 234, 0.18)",
         soft: "0 18px 60px rgba(16, 32, 55, 0.12)"
       },

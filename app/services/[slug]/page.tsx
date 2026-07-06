@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, CheckCircle2, ChevronRight, MessageCircle, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronRight, ShieldCheck, Sparkles } from "lucide-react";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { getServiceBySlug, services } from "@/lib/services";
@@ -95,18 +95,11 @@ export default async function ServicePage({ params }: PageProps) {
             <p className="mt-5 max-w-2xl text-base leading-8 text-slate-600">{service.detail}</p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link
-                href={`/#request`}
+                href="/#request"
                 className="inline-flex h-12 items-center gap-2 rounded-full bg-brand-ink px-5 text-sm font-bold text-white transition hover:bg-brand-navy"
               >
                 Request this service
                 <ArrowRight size={17} />
-              </Link>
-              <Link
-                href="/#contact"
-                className="inline-flex h-12 items-center gap-2 rounded-full bg-white px-5 text-sm font-bold text-brand-ink shadow-sm transition hover:bg-brand-gold"
-              >
-                <MessageCircle size={17} />
-                Contact team
               </Link>
             </div>
           </div>

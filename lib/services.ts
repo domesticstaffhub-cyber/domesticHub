@@ -16,6 +16,7 @@ export const services = [
       "Professional chef placement",
       "Private and home chef services",
       "Restaurant and hotel chef recruitment",
+      "Hospitality support",
       "Event and catering chefs",
       "Pastry and bakery chefs",
       "Temporary and full-time chef staffing"
@@ -75,6 +76,7 @@ export const services = [
     services: [
       "Primary and secondary home tutoring",
       "Private lesson services",
+      "Nursery/Kindergarten/Play Group",
       "Exam preparation classes",
       "Assignment and homework assistance",
       "WAEC, NECO, and JAMB coaching",
@@ -169,6 +171,7 @@ export const stats = [
 export const navLinks = [
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Request", href: "#request" },
   { label: "Contact", href: "#contact" }
 ] as const;
@@ -177,17 +180,17 @@ export const companyStory = {
   intro:
     "Domestic Staffing Hub connects families, homes, and businesses with reliable domestic support handled with care, discretion, and professionalism.",
   mission:
-    "To make trusted domestic staffing easier for clients by guiding each request with clarity, respect, and dependable follow-up.",
+    "To match selective households with skilled, reliable domestic staff by delivering discreet, efficient and personalized recruitment services that uphold excellence, integrity and respect for both client and staff",
   vision:
-    "To become a trusted name for domestic support in Warri and beyond, known for quality people, peace of mind, and service that feels personal.",
+    "To be the leading and most trusted domestic staffing hub, recognized for delivering exceptional professionals and setting the benchmark for reliability, professionalism and tailored service",
   values: ["Trust", "Care", "Professional service", "Peace of mind"]
 } as const;
 
 export const jobSeekerFeature = {
   icon: BriefcaseBusiness,
-  title: "Work with Domestic Staffing Hub",
+  title: "I Need a Job",
   description:
-    "A private path for professionals who want to offer their skills through the company."
+    "A direct path for applicants who want to offer domestic staffing services through the company."
 };
 
 export function getServiceBySlug(slug: string) {

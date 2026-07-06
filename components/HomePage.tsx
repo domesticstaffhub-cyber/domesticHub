@@ -76,10 +76,10 @@ export function HomePage() {
               <Sparkles size={14} />
               Domestic staffing for homes and businesses
             </span>
-            <h1 className="max-w-4xl text-5xl font-black leading-[1.02] text-white sm:text-6xl lg:text-7xl">
+            <h1 className="max-w-4xl text-4xl font-black leading-[1.04] text-white sm:text-6xl lg:text-7xl">
               Domestic Staffing Hub
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/80 sm:text-xl">
+            <p className="mt-5 max-w-2xl text-base leading-7 text-white/80 sm:mt-6 sm:text-xl sm:leading-8">
               Quality people, trusted service, and peace of mind for homes, families, and businesses.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -114,14 +114,14 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="services" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <section className="mx-auto max-w-7xl px-3 py-12 sm:px-6 sm:py-16 lg:px-8">
+        <div id="services" className="mb-7 flex flex-col gap-4 sm:mb-10 md:flex-row md:items-end md:justify-between">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full bg-brand-blue/10 px-4 py-2 text-sm font-bold text-brand-navy">
               <BadgeCheck size={16} />
               Services
             </span>
-            <h2 className="mt-4 text-3xl font-black tracking-tight text-brand-ink sm:text-4xl">
+            <h2 className="mt-4 text-2xl font-black tracking-tight text-brand-ink sm:text-4xl">
               Choose the support you need
             </h2>
           </div>
@@ -130,7 +130,7 @@ export function HomePage() {
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
@@ -141,10 +141,10 @@ export function HomePage() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ duration: 0.55, delay: index * 0.05 }}
-                className={`group overflow-hidden rounded-[2rem] bg-gradient-to-br ${service.accent} p-4 shadow-soft`}
+                className={`group overflow-hidden rounded-[1.5rem] bg-gradient-to-br ${service.accent} p-3 shadow-soft sm:rounded-[2rem] sm:p-4`}
               >
-                <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
-                  <div className="relative min-h-[22rem] overflow-hidden rounded-[1.5rem] lg:min-h-72">
+                <div className="grid gap-4 sm:gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+                  <div className="relative min-h-[15rem] overflow-hidden rounded-[1.15rem] sm:min-h-[20rem] sm:rounded-[1.5rem] lg:min-h-72">
                     <Image
                       src={service.image}
                       alt={service.title}
@@ -154,17 +154,17 @@ export function HomePage() {
                       style={{ objectPosition: service.imagePosition }}
                     />
                   </div>
-                  <div className="flex flex-col justify-between gap-5 p-2">
+                  <div className="flex flex-col justify-between gap-4 p-1 sm:gap-5 sm:p-2">
                     <div>
-                      <span className="grid h-12 w-12 place-items-center rounded-2xl bg-white text-brand-navy shadow-sm">
-                        <Icon size={23} />
+                      <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white text-brand-navy shadow-sm sm:h-12 sm:w-12">
+                        <Icon size={22} />
                       </span>
-                      <h3 className="mt-5 text-2xl font-black text-brand-ink">{service.title}</h3>
+                      <h3 className="mt-4 text-xl font-black text-brand-ink sm:mt-5 sm:text-2xl">{service.title}</h3>
                       <p className="mt-3 text-sm leading-6 text-slate-600">{service.summary}</p>
                     </div>
                     <div className="grid gap-2">
                       {service.promise.slice(0, 2).map((item) => (
-                        <div key={item} className="flex items-center gap-2 text-sm font-semibold text-brand-ink">
+                        <div key={item} className="flex items-center gap-2 text-[0.82rem] font-semibold leading-5 text-brand-ink sm:text-sm">
                           <ShieldCheck size={16} className="text-brand-mint" />
                           {item}
                         </div>
@@ -174,14 +174,14 @@ export function HomePage() {
                       <button
                         type="button"
                         onClick={() => openChat(service.slug)}
-                        className="inline-flex h-11 items-center gap-2 rounded-full bg-brand-ink px-4 text-sm font-semibold text-white transition hover:bg-brand-navy"
+                        className="inline-flex h-10 items-center gap-2 rounded-full bg-brand-ink px-4 text-sm font-semibold text-white transition hover:bg-brand-navy sm:h-11"
                       >
                         <MessageCircle size={16} />
                         Chat
                       </button>
                       <Link
                         href={`/services/${service.slug}`}
-                        className="inline-flex h-11 items-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-brand-ink transition hover:bg-brand-gold"
+                        className="inline-flex h-10 items-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-brand-ink transition hover:bg-brand-gold sm:h-11"
                       >
                         Details
                         <ChevronRight size={16} />
@@ -195,7 +195,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="about" className="relative overflow-hidden bg-brand-ink px-4 py-16 text-white sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-brand-ink px-4 py-16 text-white sm:px-6 lg:px-8">
         <div className="absolute inset-0 opacity-30">
           <Image
             src="/images/services/mission_vision.jpeg"
@@ -206,7 +206,7 @@ export function HomePage() {
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-brand-ink via-brand-ink/90 to-brand-navy/75" />
-        <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+        <div id="about" className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-bold backdrop-blur">
               <Sparkles size={16} />
@@ -269,8 +269,8 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="request" className="bg-mesh-light px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+      <section className="bg-mesh-light px-4 py-16 sm:px-6 lg:px-8">
+        <div id="request" className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-brand-navy shadow-sm">
               <ShieldCheck size={16} />

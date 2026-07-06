@@ -18,7 +18,7 @@ export function WhatsAppModal({ open, onClose, initialService }: WhatsAppModalPr
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [demoOpen, setDemoOpen] = useState(false);
   const selectedService = useMemo(
-    () => serviceOptions.find((service) => service.value === initialService)?.value || serviceOptions[0].value,
+    () => serviceOptions.find((service) => service.value === initialService)?.value || "",
     [initialService]
   );
 
@@ -40,7 +40,13 @@ export function WhatsAppModal({ open, onClose, initialService }: WhatsAppModalPr
     setErrors({});
 
     const service = serviceOptions.find((item) => item.value === parsed.data.serviceType);
-    const message = `Hello, my name is ${parsed.data.name}. I would like to chat about ${service?.label || "a service"} from Domestic Staffing Hub.`;
+    const message = [
+      "Hello Domestic Staffing Hub,",
+      "",
+      `My name is ${parsed.data.name}, and I would like to enquire about your ${service?.label || "domestic staffing"} service.`,
+      "",
+      "Thank you."
+    ].join("\n");
 
     if (isDemoValue(contact.whatsappNumber)) {
       setDemoOpen(true);
@@ -108,6 +114,9 @@ export function WhatsAppModal({ open, onClose, initialService }: WhatsAppModalPr
                     defaultValue={selectedService}
                     className="h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-brand-ink outline-none transition focus:border-brand-blue focus:bg-white focus:ring-4 focus:ring-brand-sky/15"
                   >
+                    <option value="" disabled>
+                      Select a service
+                    </option>
                     {serviceOptions.map((service) => (
                       <option key={service.value} value={service.value}>
                         {service.label}

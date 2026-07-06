@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Loader2, Send, ShieldCheck } from "lucide-react";
 import { serviceOptions } from "@/lib/services";
 import { flattenZodErrors, serviceRequestSchema } from "@/lib/validation";
@@ -19,6 +19,16 @@ export function ServiceRequestForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formState, setFormState] = useState(initialState);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!formState.message) return;
+
+    const timer = window.setTimeout(() => {
+      setFormState(initialState);
+    }, 3000);
+
+    return () => window.clearTimeout(timer);
+  }, [formState.message]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -131,7 +141,7 @@ export function ServiceRequestForm() {
           <textarea
             name="message"
             rows={4}
-            placeholder="Tell us the role, location, schedule, and any special requirement."
+            placeholder="Tell us the location, schedule, living arrangement, and any special requirement."
             className="field-input min-h-32 resize-none py-3"
           />
         </Field>
