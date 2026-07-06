@@ -4,8 +4,7 @@ export const contact = {
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@domesticstaffinghub.com",
   socials: {
     instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL || "https://www.instagram.com/domestic_staffinghub?igsh=b3kyNDc0MDR2enI0",
-    facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL || "https://www.facebook.com/mopncleann",
-    linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL || ""
+    facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL || "https://www.facebook.com/mopncleann"
   }
 };
 

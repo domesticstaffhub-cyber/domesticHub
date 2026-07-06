@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, CheckCircle2, MessageCircle, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronRight, ShieldCheck, Sparkles } from "lucide-react";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { getServiceBySlug, services } from "@/lib/services";
@@ -13,12 +13,25 @@ type PageProps = {
   }>;
 };
 
-const colorBlocks = [
-  "bg-brand-clay",
-  "bg-brand-indigo",
-  "bg-brand-teal",
-  "bg-brand-leaf",
-  "bg-brand-saffron"
+const pageThemes = [
+  {
+    shell: "from-[#fff8e8] via-white to-[#dff2ff]",
+    dark: "from-brand-ink to-brand-navy",
+    badge: "bg-brand-gold/20 text-brand-ink",
+    ring: "ring-brand-gold/30"
+  },
+  {
+    shell: "from-[#eaf6ff] via-white to-[#e2faef]",
+    dark: "from-brand-navy to-brand-ink",
+    badge: "bg-brand-blue/10 text-brand-navy",
+    ring: "ring-brand-sky/30"
+  },
+  {
+    shell: "from-[#e8fbf3] via-white to-[#fff5df]",
+    dark: "from-emerald-950 to-brand-ink",
+    badge: "bg-brand-mint/10 text-emerald-800",
+    ring: "ring-brand-mint/30"
+  }
 ] as const;
 
 export function generateStaticParams() {
@@ -55,157 +68,144 @@ export default async function ServicePage({ params }: PageProps) {
   }
 
   const serviceIndex = services.findIndex((item) => item.slug === service.slug);
-  const accent = colorBlocks[Math.max(serviceIndex, 0) % colorBlocks.length];
+  const theme = pageThemes[Math.max(serviceIndex, 0) % pageThemes.length];
   const Icon = service.icon;
   const otherServices = services.filter((item) => item.slug !== service.slug);
 
   return (
-    <main className="min-h-screen bg-brand-paper text-brand-ink">
-      <SiteHeader />
+    <main className={`min-h-screen bg-gradient-to-br ${theme.shell} text-brand-ink`}>
+      <SiteHeader tone="light" />
 
-      <section className="grid bg-brand-bone pt-[72px] lg:min-h-[90svh] lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="flex items-end px-4 py-12 sm:px-6 lg:px-8">
-          <div className="mx-auto w-full max-w-xl lg:ml-auto">
+      <section className="relative overflow-hidden px-4 pb-12 pt-28 sm:px-6 sm:pb-16 sm:pt-32 lg:px-8">
+        <div className="absolute inset-x-0 top-0 h-[38rem] bg-white/45" />
+        <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+          <div>
             <Link
-              href="/services"
-              className="mb-7 flex w-fit items-center gap-2 text-sm font-black text-brand-ink transition hover:text-brand-clay"
+              href="/#services"
+              className="mb-6 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-brand-navy shadow-sm transition hover:text-brand-blue"
             >
-              <ArrowLeft size={16} />
-              Services
+              <ChevronRight size={16} className="rotate-180" />
+              Back to services
             </Link>
-            <span className={`inline-flex items-center gap-2 border border-brand-ink px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-white ${accent}`}>
-              <Icon size={15} />
+            <span className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold ${theme.badge}`}>
+              <Icon size={16} />
               {service.shortTitle}
             </span>
-            <h1 className="mt-5 max-w-3xl text-4xl font-black leading-tight sm:text-5xl">{service.title}</h1>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-stone-600">{service.detail}</p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <h1 className="mt-5 max-w-3xl text-4xl font-black leading-tight sm:text-6xl">{service.title}</h1>
+            <p className="mt-5 max-w-2xl text-base leading-8 text-slate-600">{service.detail}</p>
+            <div className="mt-7 flex flex-wrap gap-3">
               <Link
-                href="/contact"
-                className="inline-flex h-12 items-center gap-2 border border-brand-ink bg-brand-ink px-5 text-sm font-black text-brand-bone transition hover:bg-brand-clay"
+                href="/#request"
+                className="inline-flex h-12 items-center gap-2 rounded-full bg-brand-ink px-5 text-sm font-bold text-white transition hover:bg-brand-navy"
               >
                 Request this service
                 <ArrowRight size={17} />
               </Link>
-              <Link
-                href="/contact"
-                className="inline-flex h-12 items-center gap-2 border border-brand-line bg-white px-5 text-sm font-black text-brand-ink transition hover:border-brand-ink"
-              >
-                <MessageCircle size={17} />
-                Contact team
-              </Link>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className={`absolute -inset-3 rounded-[2.3rem] bg-gradient-to-br ${theme.dark} opacity-[0.12] blur-2xl`} />
+            <div className={`relative overflow-hidden rounded-[2rem] bg-white p-3 shadow-glow ring-8 ${theme.ring}`}>
+              <div className="relative min-h-[22rem] overflow-hidden rounded-[1.55rem] sm:min-h-[31rem]">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  sizes="(min-width: 1024px) 48vw, 92vw"
+                  className="object-cover"
+                  style={{ objectPosition: service.imagePosition }}
+                  priority
+                />
+              </div>
             </div>
           </div>
         </div>
-
-        <div className="relative min-h-[28rem] border-t border-brand-ink lg:border-l lg:border-t-0">
-          <Image
-            src={service.image}
-            alt={service.title}
-            fill
-            sizes="(min-width: 1024px) 54vw, 100vw"
-            className="object-cover"
-            style={{ objectPosition: service.imagePosition }}
-            priority
-          />
-          <div className={`absolute left-0 top-0 h-3 w-full ${accent}`} />
-        </div>
       </section>
 
-      <section className="surface-grid px-4 py-12 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-3">
-          <article className="border border-brand-ink bg-brand-bone p-6 shadow-soft">
-            <p className="section-kicker">Best for</p>
-            <p className="mt-4 text-lg font-black leading-7">{service.audience}</p>
-          </article>
-          <article className="border border-brand-ink bg-brand-ink p-6 text-white shadow-soft">
-            <p className="section-kicker text-brand-saffron">Approach</p>
-            <p className="mt-4 text-sm leading-7 text-white/75">{service.process}</p>
-          </article>
-          <article className="border border-brand-ink bg-white p-6 shadow-soft">
-            <p className="section-kicker">Assurance</p>
-            <p className="mt-4 text-sm leading-7 text-stone-600">{service.assurance}</p>
-          </article>
-        </div>
+      <section className="mx-auto grid max-w-7xl gap-5 px-4 pb-14 sm:px-6 lg:grid-cols-3 lg:px-8">
+        <article className="rounded-[1.6rem] bg-white p-6 shadow-soft">
+          <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-blue">Best for</p>
+          <p className="mt-4 text-lg font-black leading-7">{service.audience}</p>
+        </article>
+        <article className="rounded-[1.6rem] bg-brand-ink p-6 text-white shadow-soft">
+          <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold">How we guide</p>
+          <p className="mt-4 text-sm leading-7 text-white/75">{service.process}</p>
+        </article>
+        <article className="rounded-[1.6rem] bg-white p-6 shadow-soft">
+          <p className="text-sm font-black uppercase tracking-[0.14em] text-emerald-700">Assurance</p>
+          <p className="mt-4 text-sm leading-7 text-slate-600">{service.assurance}</p>
+        </article>
       </section>
 
-      <section className="bg-brand-bone px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+      <section className="bg-white px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_0.82fr]">
           <div>
-            <p className="section-kicker">What you can request</p>
-            <h2 className="mt-3 max-w-2xl text-3xl font-black leading-tight sm:text-4xl">Service options for this need.</h2>
-            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            <span className="inline-flex items-center gap-2 rounded-full bg-brand-blue/10 px-4 py-2 text-sm font-bold text-brand-navy">
+              <ShieldCheck size={16} />
+              What you can request
+            </span>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {service.services.map((item) => (
-                <div key={item} className="flex min-h-20 items-center gap-3 border border-brand-line bg-white p-4 text-sm font-bold">
-                  <CheckCircle2 size={18} className="shrink-0 text-brand-teal" />
+                <div
+                  key={item}
+                  className="flex min-h-20 items-center gap-3 rounded-[1.2rem] border border-slate-100 bg-[#f7fbff] p-4 text-sm font-semibold text-brand-ink"
+                >
+                  <CheckCircle2 size={18} className="shrink-0 text-brand-mint" />
                   {item}
                 </div>
               ))}
             </div>
           </div>
 
-          <aside className="border border-brand-ink bg-brand-ink p-6 text-white shadow-hard sm:p-7">
-            <Sparkles size={25} className="text-brand-saffron" />
-            <h2 className="mt-5 text-2xl font-black leading-tight">Why clients choose this service</h2>
-            <div className="mt-6 grid gap-3">
+          <aside className={`rounded-[2rem] bg-gradient-to-br ${theme.dark} p-6 text-white shadow-soft sm:p-7`}>
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-brand-gold">
+              <Sparkles size={16} />
+              Why clients choose this
+            </span>
+            <div className="mt-6 grid gap-4">
               {service.highlights.map((item) => (
-                <div key={item} className="border border-white/10 bg-white/5 p-4">
-                  <p className="font-black">{item}</p>
+                <div key={item} className="rounded-[1.2rem] border border-white/10 bg-white/10 p-4">
+                  <p className="font-bold">{item}</p>
                 </div>
               ))}
             </div>
             <p className="mt-6 text-sm leading-7 text-white/70">
-              Share the details once and the team will guide the most suitable next step.
+              Share your exact need once. The team uses that context to follow up clearly and help you choose the most suitable support.
             </p>
           </aside>
         </div>
       </section>
 
-      <section className="bg-brand-paper px-4 py-14 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="section-kicker">Explore more</p>
-              <h2 className="mt-2 text-2xl font-black">Other services</h2>
-            </div>
-            <Link href="/contact" className="inline-flex items-center gap-2 text-sm font-black text-brand-ink hover:text-brand-clay">
-              Request staff
-              <ArrowRight size={16} />
-            </Link>
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-navy">Explore more</p>
+            <h2 className="mt-2 text-3xl font-black">Other service paths</h2>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {otherServices.map((item) => {
-              const OtherIcon = item.icon;
-
-              return (
-                <Link
-                  key={item.slug}
-                  href={`/services/${item.slug}`}
-                  className="group border border-brand-line bg-brand-bone p-5 transition hover:border-brand-ink hover:bg-white"
-                >
-                  <OtherIcon size={23} className="text-brand-clay" />
-                  <h3 className="mt-5 text-base font-black">{item.title}</h3>
-                  <p className="mt-2 line-clamp-2 text-sm leading-6 text-stone-600">{item.summary}</p>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-brand-teal px-4 py-14 text-white sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-7xl flex-col gap-5 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-3">
-            <ShieldCheck size={24} className="text-brand-saffron" />
-            <h2 className="text-2xl font-black leading-tight">Ready to begin?</h2>
-          </div>
-          <Link
-            href="/contact"
-            className="inline-flex h-12 w-fit items-center gap-2 border border-white bg-white px-5 text-sm font-black text-brand-ink transition hover:bg-brand-saffron"
-          >
-            Request Staff
-            <ArrowRight size={17} />
+          <Link href="/#request" className="inline-flex items-center gap-2 text-sm font-bold text-brand-navy hover:text-brand-blue">
+            Ready to request staff
+            <ArrowRight size={16} />
           </Link>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {otherServices.map((item) => {
+            const OtherIcon = item.icon;
+
+            return (
+              <Link
+                key={item.slug}
+                href={`/services/${item.slug}`}
+                className="group rounded-[1.35rem] bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-soft"
+              >
+                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-brand-blue/10 text-brand-navy">
+                  <OtherIcon size={21} />
+                </span>
+                <h3 className="mt-5 text-base font-black">{item.title}</h3>
+                <p className="mt-2 line-clamp-2 text-sm leading-6 text-slate-600">{item.summary}</p>
+              </Link>
+            );
+          })}
         </div>
       </section>
 

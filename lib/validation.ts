@@ -52,14 +52,6 @@ export const jobInterestSchema = z
       .min(2, "Name must be at least 2 characters.")
       .max(70, "Name is too long.")
       .regex(nameRegex, "Name can only contain letters, spaces, apostrophes, dots, and hyphens."),
-    email: z.string().trim().email("Enter a valid email address.").max(120, "Email is too long.").optional().or(z.literal("")),
-    phone: z
-      .string()
-      .trim()
-      .max(24, "Phone number is too long.")
-      .optional()
-      .or(z.literal(""))
-      .refine((value) => !value || phoneRegex.test(value), "Enter a valid phone number."),
     serviceType: z.enum(seekerValues, {
       errorMap: () => ({ message: "Select a valid work category." })
     }),
