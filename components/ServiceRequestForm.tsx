@@ -82,14 +82,14 @@ export function ServiceRequestForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-[2rem] bg-white p-5 shadow-soft md:p-7">
-      <div className="mb-6 flex items-center gap-3">
-        <span className="grid h-11 w-11 place-items-center rounded-2xl bg-brand-blue/10 text-brand-blue">
+    <form onSubmit={handleSubmit} className="border border-brand-ink bg-brand-bone p-4 shadow-hard sm:p-6">
+      <div className="mb-6 flex items-start gap-3 border-b border-brand-line pb-5">
+        <span className="grid h-11 w-11 shrink-0 place-items-center border border-brand-ink bg-brand-saffron text-brand-ink">
           <ShieldCheck size={22} />
         </span>
         <div>
-          <h2 className="text-2xl font-semibold text-brand-ink">Request trusted staff</h2>
-          <p className="text-sm text-slate-500">Share a few details and the team will follow up.</p>
+          <h2 className="text-2xl font-black leading-tight text-brand-ink">Request trusted staff</h2>
+          <p className="mt-1 text-sm leading-6 text-stone-600">Tell us what you need and the team will follow up.</p>
         </div>
       </div>
 
@@ -97,31 +97,15 @@ export function ServiceRequestForm() {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Name" error={errors.name}>
-          <input
-            name="name"
-            autoComplete="name"
-            placeholder="Your full name"
-            className="field-input"
-          />
+          <input name="name" autoComplete="name" placeholder="Your full name" className="field-input" />
         </Field>
 
         <Field label="Email" error={errors.email}>
-          <input
-            name="email"
-            type="email"
-            autoComplete="email"
-            placeholder="you@example.com"
-            className="field-input"
-          />
+          <input name="email" type="email" autoComplete="email" placeholder="you@example.com" className="field-input" />
         </Field>
 
         <Field label="Phone" error={errors.phone}>
-          <input
-            name="phone"
-            autoComplete="tel"
-            placeholder="+234 800 000 0000"
-            className="field-input"
-          />
+          <input name="phone" autoComplete="tel" placeholder="+234 800 000 0000" className="field-input" />
         </Field>
 
         <Field label="Service" error={errors.serviceType}>
@@ -141,7 +125,7 @@ export function ServiceRequestForm() {
           <textarea
             name="message"
             rows={4}
-            placeholder="Tell us the location, schedule, living arrangement, and any special requirement."
+            placeholder="Location, schedule, living arrangement, and any special requirement."
             className="field-input min-h-32 resize-none py-3"
           />
         </Field>
@@ -149,8 +133,10 @@ export function ServiceRequestForm() {
 
       {formState.message ? (
         <p
-          className={`mt-4 rounded-2xl px-4 py-3 text-sm font-medium ${
-            formState.status === "success" ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-800"
+          className={`mt-4 border px-4 py-3 text-sm font-bold ${
+            formState.status === "success"
+              ? "border-brand-teal/30 bg-brand-teal/10 text-brand-teal"
+              : "border-brand-saffron/40 bg-brand-saffron/15 text-brand-ink"
           }`}
         >
           {formState.message}
@@ -160,7 +146,7 @@ export function ServiceRequestForm() {
       <button
         type="submit"
         disabled={loading}
-        className="mt-5 inline-flex h-[52px] w-full items-center justify-center gap-2 rounded-full bg-brand-ink px-6 text-sm font-semibold text-white transition hover:bg-brand-navy disabled:cursor-not-allowed disabled:opacity-70"
+        className="mt-5 inline-flex h-[52px] w-full items-center justify-center gap-2 border border-brand-ink bg-brand-ink px-6 text-sm font-black text-brand-bone transition hover:bg-brand-clay disabled:opacity-70"
       >
         {loading ? <Loader2 className="animate-spin" size={18} /> : <Send size={18} />}
         Submit Request
@@ -181,10 +167,10 @@ function Field({
   wide?: boolean;
 }) {
   return (
-    <label className={`grid gap-2 text-sm font-medium text-brand-ink ${wide ? "sm:col-span-2" : ""}`}>
+    <label className={`grid gap-2 text-sm font-black text-brand-ink ${wide ? "sm:col-span-2" : ""}`}>
       {label}
       {children}
-      {error ? <span className="text-xs font-medium text-red-600">{error}</span> : null}
+      {error ? <span className="text-xs font-bold text-brand-clay">{error}</span> : null}
     </label>
   );
 }

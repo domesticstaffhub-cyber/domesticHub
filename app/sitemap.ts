@@ -5,6 +5,9 @@ const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.domesticstaffi
 
 const publicRoutes = [
   { path: "", priority: 1, changeFrequency: "weekly" },
+  { path: "/about", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/services", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/contact", priority: 0.9, changeFrequency: "monthly" },
   { path: "/gallery", priority: 0.6, changeFrequency: "weekly" }
 ] as const;
 

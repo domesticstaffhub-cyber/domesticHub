@@ -7,8 +7,9 @@ import { motion } from "framer-motion";
 import {
   ArrowRight,
   BadgeCheck,
+  CheckCircle2,
   ChevronRight,
-  Clock,
+  Clock3,
   MessageCircle,
   ShieldCheck,
   Sparkles
@@ -17,12 +18,20 @@ import { ServiceRequestForm } from "@/components/ServiceRequestForm";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { WhatsAppModal } from "@/components/WhatsAppModal";
-import { companyStory, services, stats } from "@/lib/services";
+import { companyStory, processSteps, services, stats, trustSignals } from "@/lib/services";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0 }
 };
+
+const colorBlocks = [
+  "bg-brand-clay",
+  "bg-brand-indigo",
+  "bg-brand-teal",
+  "bg-brand-leaf",
+  "bg-brand-saffron"
+] as const;
 
 export function HomePage() {
   const [chatOpen, setChatOpen] = useState(false);
@@ -34,256 +43,303 @@ export function HomePage() {
   }
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#f7fbff] text-brand-ink">
-      <SiteHeader onChat={() => openChat()} />
+    <main className="min-h-screen overflow-hidden bg-brand-paper text-brand-ink">
+      <SiteHeader onChat={() => openChat()} tone="dark" />
 
-      <section className="relative min-h-[88svh] overflow-hidden bg-brand-ink pt-20 text-white">
+      <section className="relative min-h-[92svh] overflow-hidden bg-brand-ink text-white">
         <div className="absolute inset-0">
-          <div className="hero-collage">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.slug}
-                className="relative overflow-hidden rounded-[2rem]"
-                initial={{ opacity: 0, scale: 1.05, y: 30 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.09 }}
-              >
-                <Image
-                  src={service.image}
-                  alt=""
-                  fill
-                  sizes="34vw"
-                  className="object-cover"
-                  style={{ objectPosition: service.imagePosition }}
-                  priority={index < 2}
-                />
-              </motion.div>
-            ))}
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-ink via-brand-ink/88 to-brand-navy/58" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_24%,rgba(244,182,63,.24),transparent_30%),radial-gradient(circle_at_22%_86%,rgba(43,191,138,.22),transparent_28%)]" />
+          <Image
+            src="/images/services/maid_nanny_caregiver.jpg"
+            alt="Domestic staff support"
+            fill
+            sizes="100vw"
+            className="object-cover"
+            style={{ objectPosition: "center 24%" }}
+            priority
+          />
+          <div className="absolute inset-0 hero-shade" />
+          <div className="absolute bottom-0 left-0 right-0 h-3 kinetic-strip" />
         </div>
 
-        <div className="relative mx-auto grid min-h-[calc(88svh-5rem)] max-w-7xl content-center px-4 py-14 sm:px-6 lg:px-8">
+        <div className="relative mx-auto grid min-h-[92svh] max-w-7xl content-end px-4 pb-14 pt-28 sm:px-6 lg:px-8">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             animate="visible"
             transition={{ duration: 0.7 }}
-            className="max-w-3xl"
+            className="max-w-5xl"
           >
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-white/90 backdrop-blur sm:text-sm">
-              <Sparkles size={14} />
-              Domestic staffing for homes and businesses
+            <span className="inline-flex items-center gap-2 border border-white/20 bg-white/10 px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-white backdrop-blur">
+              <Sparkles size={15} />
+              Domestic staffing for homes and business
             </span>
-            <h1 className="max-w-4xl text-4xl font-black leading-[1.04] text-white sm:text-6xl lg:text-7xl">
-              Domestic Staffing Hub
+            <h1 className="mt-6 max-w-5xl text-4xl font-black leading-tight text-white sm:text-5xl">
+              Trusted staff for the way your home works.
             </h1>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-white/80 sm:mt-6 sm:text-xl sm:leading-8">
-              Quality people, trusted service, and peace of mind for homes, families, and businesses.
+            <p className="mt-6 max-w-2xl text-base leading-8 text-white/80 sm:text-lg">
+              Chefs, drivers, tutors, maids, nannies, caregivers, and custom domestic support with careful follow-up.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href="#request"
-                className="inline-flex h-[52px] items-center gap-2 rounded-full bg-white px-6 text-sm font-bold text-brand-ink transition hover:bg-brand-gold"
+              <Link
+                href="/contact"
+                className="inline-flex h-[52px] items-center gap-2 border border-brand-saffron bg-brand-saffron px-5 text-sm font-black text-brand-ink transition hover:bg-white"
               >
                 Request Staff
                 <ArrowRight size={18} />
-              </a>
+              </Link>
               <button
                 type="button"
                 onClick={() => openChat()}
-                className="inline-flex h-[52px] items-center gap-2 rounded-full border border-white/25 bg-white/10 px-6 text-sm font-bold text-white backdrop-blur transition hover:bg-white/20"
+                className="inline-flex h-[52px] items-center gap-2 border border-white/25 bg-white/10 px-5 text-sm font-black text-white backdrop-blur transition hover:bg-white hover:text-brand-ink"
               >
                 <MessageCircle size={18} />
-                Chat on WhatsApp
+                WhatsApp
               </button>
             </div>
           </motion.div>
         </div>
       </section>
 
-      <section className="-mt-8 relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid overflow-hidden rounded-[2rem] bg-white shadow-glow md:grid-cols-3">
-          {stats.map((stat) => (
-            <div key={stat.label} className="border-b border-slate-100 p-6 md:border-b-0 md:border-r last:md:border-r-0">
-              <p className={`${stat.label ? "text-3xl" : "text-2xl"} font-black text-brand-navy`}>{stat.value}</p>
-              {stat.label ? <p className="mt-1 text-sm font-medium text-slate-500">{stat.label}</p> : null}
-            </div>
+      <section className="border-b border-brand-ink bg-brand-ink py-4 text-brand-bone">
+        <div className="marquee-track flex w-max items-center gap-5 whitespace-nowrap">
+          {[...services, ...services].map((service, index) => (
+            <span key={`${service.slug}-${index}`} className="flex items-center gap-5 text-sm font-black uppercase tracking-[0.18em] text-white/75">
+              {service.title}
+              <span className="h-2 w-2 bg-brand-saffron" />
+            </span>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-3 py-12 sm:px-6 sm:py-16 lg:px-8">
-        <div id="services" className="mb-7 flex flex-col gap-4 sm:mb-10 md:flex-row md:items-end md:justify-between">
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-full bg-brand-blue/10 px-4 py-2 text-sm font-bold text-brand-navy">
-              <BadgeCheck size={16} />
-              Services
-            </span>
-            <h2 className="mt-4 text-2xl font-black tracking-tight text-brand-ink sm:text-4xl">
-              Choose the support you need
-            </h2>
-          </div>
-          <p className="max-w-xl text-sm leading-6 text-slate-600">
-            Explore the main service areas, then request staff or chat with the team for quick guidance.
-          </p>
+      <section className="surface-grid border-b border-brand-line bg-brand-paper px-4 py-10 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-3">
+          {stats.map((stat) => (
+            <motion.div
+              key={stat.label}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.5 }}
+              className="border border-brand-ink bg-brand-bone p-5 shadow-soft"
+            >
+              <p className="text-3xl font-black text-brand-ink">{stat.value}</p>
+              <p className="mt-2 text-sm font-black uppercase tracking-[0.16em] text-stone-500">{stat.label}</p>
+            </motion.div>
+          ))}
         </div>
+      </section>
 
-        <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
-          {services.map((service, index) => {
-            const Icon = service.icon;
-            return (
-              <motion.article
-                key={service.slug}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.25 }}
-                transition={{ duration: 0.55, delay: index * 0.05 }}
-                className={`group overflow-hidden rounded-[1.5rem] bg-gradient-to-br ${service.accent} p-3 shadow-soft sm:rounded-[2rem] sm:p-4`}
-              >
-                <div className="grid gap-4 sm:gap-5 lg:grid-cols-[0.9fr_1.1fr]">
-                  <div className="relative min-h-[15rem] overflow-hidden rounded-[1.15rem] sm:min-h-[20rem] sm:rounded-[1.5rem] lg:min-h-72">
+      <section className="bg-brand-bone px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-10 grid gap-5 lg:grid-cols-[0.8fr_1fr] lg:items-end">
+            <div>
+              <p className="section-kicker">Services</p>
+              <h2 className="mt-3 max-w-2xl text-3xl font-black leading-tight sm:text-4xl">
+                Practical help, matched to real household routines.
+              </h2>
+            </div>
+            <p className="max-w-2xl text-sm leading-7 text-stone-600 lg:justify-self-end">
+              Choose the support you need, then request staff or speak with the team for guidance.
+            </p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+            {services.map((service, index) => {
+              const Icon = service.icon;
+
+              return (
+                <motion.article
+                  key={service.slug}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.55, delay: index * 0.05 }}
+                  className="group flex min-h-[28rem] flex-col border border-brand-ink bg-white shadow-soft transition hover:-translate-y-1 hover:shadow-hard"
+                >
+                  <div className="relative min-h-48 overflow-hidden border-b border-brand-ink">
                     <Image
                       src={service.image}
                       alt={service.title}
                       fill
-                      sizes="(min-width: 1024px) 38vw, 92vw"
+                      sizes="(min-width: 1280px) 20vw, (min-width: 768px) 45vw, 92vw"
                       className="object-cover transition duration-700 group-hover:scale-105"
                       style={{ objectPosition: service.imagePosition }}
                     />
+                    <div className={`absolute left-0 top-0 h-2 w-full ${colorBlocks[index % colorBlocks.length]}`} />
                   </div>
-                  <div className="flex flex-col justify-between gap-4 p-1 sm:gap-5 sm:p-2">
-                    <div>
-                      <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white text-brand-navy shadow-sm sm:h-12 sm:w-12">
-                        <Icon size={22} />
-                      </span>
-                      <h3 className="mt-4 text-xl font-black text-brand-ink sm:mt-5 sm:text-2xl">{service.title}</h3>
-                      <p className="mt-3 text-sm leading-6 text-slate-600">{service.summary}</p>
-                    </div>
-                    <div className="grid gap-2">
-                      {service.promise.slice(0, 2).map((item) => (
-                        <div key={item} className="flex items-center gap-2 text-[0.82rem] font-semibold leading-5 text-brand-ink sm:text-sm">
-                          <ShieldCheck size={16} className="text-brand-mint" />
-                          {item}
-                        </div>
-                      ))}
-                    </div>
-                    <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-1 flex-col p-5">
+                    <span className={`grid h-11 w-11 place-items-center border border-brand-ink text-white ${colorBlocks[index % colorBlocks.length]}`}>
+                      <Icon size={21} />
+                    </span>
+                    <h3 className="mt-5 text-lg font-black leading-tight">{service.title}</h3>
+                    <p className="mt-3 flex-1 text-sm leading-6 text-stone-600">{service.summary}</p>
+                    <div className="mt-5 flex items-center justify-between gap-3 border-t border-brand-line pt-4">
                       <button
                         type="button"
                         onClick={() => openChat(service.slug)}
-                        className="inline-flex h-10 items-center gap-2 rounded-full bg-brand-ink px-4 text-sm font-semibold text-white transition hover:bg-brand-navy sm:h-11"
+                        className="grid h-10 w-10 place-items-center border border-brand-line text-brand-ink transition hover:border-brand-ink"
+                        aria-label={`Chat about ${service.title}`}
                       >
-                        <MessageCircle size={16} />
-                        Chat
+                        <MessageCircle size={17} />
                       </button>
                       <Link
                         href={`/services/${service.slug}`}
-                        className="inline-flex h-10 items-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-brand-ink transition hover:bg-brand-gold sm:h-11"
+                        className="inline-flex items-center gap-2 text-sm font-black text-brand-ink transition hover:text-brand-clay"
                       >
                         Details
                         <ChevronRight size={16} />
                       </Link>
                     </div>
                   </div>
-                </div>
-              </motion.article>
-            );
-          })}
+                </motion.article>
+              );
+            })}
+          </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-brand-ink px-4 py-16 text-white sm:px-6 lg:px-8">
-        <div className="absolute inset-0 opacity-30">
-          <Image
-            src="/images/services/mission_vision.jpeg"
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-ink via-brand-ink/90 to-brand-navy/75" />
-        <div id="about" className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+      <section className="bg-brand-ink px-4 py-16 text-brand-bone sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-bold backdrop-blur">
-              <Sparkles size={16} />
-              About the company
-            </span>
-            <h2 className="mt-5 max-w-2xl text-3xl font-black tracking-tight sm:text-4xl">
-              Built around trust, careful matching, and peace of mind.
+            <p className="section-kicker text-brand-saffron">Why clients call</p>
+            <h2 className="mt-3 max-w-xl text-3xl font-black leading-tight text-white sm:text-4xl">
+              Calm homes need dependable people.
             </h2>
-            <p className="mt-5 max-w-2xl text-sm leading-7 text-white/75">{companyStory.intro}</p>
+            <p className="mt-5 max-w-xl text-sm leading-7 text-white/70">{companyStory.intro}</p>
             <Link
-              href="#about"
-              className="mt-7 inline-flex h-12 items-center gap-2 rounded-full bg-white px-5 text-sm font-bold text-brand-ink transition hover:bg-brand-gold"
+              href="/about"
+              className="mt-7 inline-flex h-12 items-center gap-2 border border-white/20 px-5 text-sm font-black text-white transition hover:border-brand-saffron hover:text-brand-saffron"
             >
-              View mission and vision
+              About the company
               <ArrowRight size={17} />
             </Link>
           </div>
+
+          <div className="grid gap-4 md:grid-cols-3">
+            {trustSignals.map((item, index) => {
+              const Icon = item.icon;
+
+              return (
+                <motion.div
+                  key={item.title}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.25 }}
+                  transition={{ duration: 0.55, delay: index * 0.08 }}
+                  className="border border-white/10 bg-white/5 p-5"
+                >
+                  <Icon size={24} className="text-brand-saffron" />
+                  <h3 className="mt-5 text-lg font-black text-white">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-white/70">{item.text}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-brand-paper px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.75fr_1.25fr]">
+          <div>
+            <p className="section-kicker">How it works</p>
+            <h2 className="mt-3 text-3xl font-black leading-tight sm:text-4xl">Simple request, careful follow-up.</h2>
+            <p className="mt-5 text-sm leading-7 text-stone-600">
+              Start with the need. The team helps you move toward the right support.
+            </p>
+          </div>
+
           <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rounded-[1.5rem] border border-white/10 bg-white/10 p-5 backdrop-blur">
-              <p className="text-sm font-bold text-brand-gold">Mission</p>
-              <p className="mt-3 text-sm leading-6 text-white/75">{companyStory.mission}</p>
-            </div>
-            <div className="rounded-[1.5rem] border border-white/10 bg-white/10 p-5 backdrop-blur">
-              <p className="text-sm font-bold text-brand-mint">Vision</p>
-              <p className="mt-3 text-sm leading-6 text-white/75">{companyStory.vision}</p>
+            {processSteps.map((step, index) => {
+              const Icon = step.icon;
+
+              return (
+                <motion.div
+                  key={step.title}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.25 }}
+                  transition={{ duration: 0.55, delay: index * 0.06 }}
+                  className="border border-brand-ink bg-brand-bone p-5"
+                >
+                  <div className="flex items-center justify-between gap-4">
+                    <Icon size={25} className="text-brand-clay" />
+                    <span className="text-sm font-black text-stone-400">0{index + 1}</span>
+                  </div>
+                  <h3 className="mt-5 text-lg font-black">{step.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-stone-600">{step.text}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="grid bg-brand-bone lg:grid-cols-2">
+        <div className="relative min-h-[32rem] border-y border-brand-ink lg:border-r">
+          <Image
+            src="/images/services/chef.jpg"
+            alt="Chef service"
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
+            style={{ objectPosition: "center 38%" }}
+          />
+          <div className="absolute left-0 top-0 h-3 w-full kinetic-strip" />
+        </div>
+        <div className="border-y border-brand-ink px-4 py-14 sm:px-6 lg:px-10">
+          <div className="mx-auto max-w-xl">
+            <p className="section-kicker">Start here</p>
+            <h2 className="mt-3 text-3xl font-black leading-tight sm:text-4xl">Tell us who you need.</h2>
+            <p className="mt-5 text-sm leading-7 text-stone-600">
+              Share the role, location, schedule, and preferences. A short request is enough to begin.
+            </p>
+            <div className="mt-8">
+              <ServiceRequestForm />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-16">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-full bg-brand-mint/10 px-4 py-2 text-sm font-bold text-emerald-700">
-              <Clock size={16} />
-              Process
-            </span>
-            <h2 className="mt-4 text-3xl font-black tracking-tight text-brand-ink sm:text-4xl">Simple request, careful handling</h2>
-            <p className="mt-5 text-sm leading-6 text-slate-600">
-              Tell us what you need, and the team will guide the next step with care and discretion.
-            </p>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-3">
-            {["Choose a service", "Share your details", "Speak with the team"].map((item, index) => (
-              <div key={item} className="rounded-[1.5rem] border border-slate-100 bg-[#f7fbff] p-5">
-                <span className="grid h-10 w-10 place-items-center rounded-full bg-brand-ink text-sm font-black text-white">
-                  {index + 1}
-                </span>
-                <h3 className="mt-5 text-lg font-bold text-brand-ink">{item}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600">
-                  {index === 0
-                    ? "Pick the category that best matches your need."
-                    : index === 1
-                      ? "Send the basics so we can understand the request."
-                      : "Get a prompt follow-up or continue on WhatsApp."}
-                </p>
-              </div>
-            ))}
-          </div>
+      <section className="bg-brand-paper px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-4">
+          {companyStory.values.map((value) => (
+            <div key={value} className="flex items-center gap-3 border border-brand-line bg-brand-bone p-4">
+              <CheckCircle2 size={18} className="shrink-0 text-brand-teal" />
+              <span className="text-sm font-black uppercase tracking-[0.13em]">{value}</span>
+            </div>
+          ))}
         </div>
       </section>
 
-      <section className="bg-mesh-light px-4 py-16 sm:px-6 lg:px-8">
-        <div id="request" className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+      <section className="bg-brand-clay px-4 py-14 text-white sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-brand-navy shadow-sm">
-              <ShieldCheck size={16} />
-              Secure Intake
-            </span>
-            <h2 className="mt-4 text-3xl font-black tracking-tight text-brand-ink sm:text-4xl">
-              Request dependable staff
-            </h2>
-            <p className="mt-5 text-sm leading-6 text-slate-600">
-              Share the service, location, schedule, and any special preference. The team will follow up from there.
+            <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-white/80">
+              <Clock3 size={15} />
+              Ready when you are
             </p>
+            <h2 className="mt-3 max-w-2xl text-3xl font-black leading-tight">Need staff for your home or business?</h2>
           </div>
-          <ServiceRequestForm />
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/contact"
+              className="inline-flex h-12 items-center gap-2 border border-white bg-white px-5 text-sm font-black text-brand-ink transition hover:bg-brand-saffron"
+            >
+              Request Staff
+              <ArrowRight size={17} />
+            </Link>
+            <Link
+              href="/services"
+              className="inline-flex h-12 items-center gap-2 border border-white/30 px-5 text-sm font-black text-white transition hover:bg-white hover:text-brand-ink"
+            >
+              View Services
+              <BadgeCheck size={17} />
+            </Link>
+          </div>
         </div>
       </section>
 
