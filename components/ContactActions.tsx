@@ -11,6 +11,7 @@ export function ContactActions() {
   const emailHref = createEmailLink(contact.email);
   const whatsappHref = createWhatsAppLink(contact.whatsappNumber, "Hello, I would like to make an enquiry from Domestic Staffing Hub.");
 
+export function ContactActions() {
   return (
     <div className="flex flex-wrap items-center gap-2">
       {hasPhone && phoneHref ? (

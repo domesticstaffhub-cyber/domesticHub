@@ -15,8 +15,7 @@ export const demoContactValues = new Set([
   "+234 800 000 0000",
   "hello@example.com",
   "https://instagram.com/example",
-  "https://facebook.com/example",
-  "https://linkedin.com/company/example"
+  "https://facebook.com/example"
 ]);
 
 export function isDemoValue(value: string) {

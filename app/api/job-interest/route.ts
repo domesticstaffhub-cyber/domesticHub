@@ -42,7 +42,6 @@ export async function POST(request: NextRequest) {
     phone: sanitizeText(parsed.data.phone) || "Not provided",
     serviceType: parsed.data.serviceType,
     serviceLabel: category?.label || parsed.data.serviceType,
-    experience: sanitizeText(parsed.data.experience),
     ip
   };
 

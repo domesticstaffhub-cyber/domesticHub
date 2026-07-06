@@ -90,6 +90,7 @@ export const services = [
       "Nursery, kindergarten, and playgroup lessons",
       "Primary and secondary home tutoring",
       "Private lesson services",
+      "Nursery/Kindergarten/Play Group",
       "Exam preparation classes",
       "Assignment and homework assistance",
       "WAEC, NECO, and JAMB coaching",

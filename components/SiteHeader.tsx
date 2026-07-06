@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, type MouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -16,6 +17,36 @@ export function SiteHeader({ onChat, tone = "light" }: SiteHeaderProps) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const isDark = tone === "dark";
+  const galleryLink = navLinks.find((link) => !link.href.startsWith("#"));
+  const sectionLinks = navLinks.filter((link) => link.href.startsWith("#"));
+
+  function hrefFor(href: string) {
+    return href.startsWith("#") ? `/${href}` : href;
+  }
+
+  function scrollToSection(id: string) {
+    const element = document.getElementById(id);
+    const header = document.querySelector("header");
+    const nav = header?.querySelector("nav");
+
+    if (!element) return;
+
+    const headerHeight = nav instanceof HTMLElement ? nav.offsetHeight : header instanceof HTMLElement ? header.offsetHeight : 72;
+    const top = element.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
+
+    window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    window.history.replaceState(null, "", `/#${id}`);
+  }
+
+  function handleSectionClick(href: string, event: MouseEvent<HTMLAnchorElement>) {
+    if (!href.startsWith("#")) return;
+
+    if (window.location.pathname === "/") {
+      event.preventDefault();
+      setMenuOpen(false);
+      scrollToSection(href.slice(1));
+    }
+  }
 
   const shellClass = isDark
     ? "border-white/10 bg-brand-ink/90 text-white"
