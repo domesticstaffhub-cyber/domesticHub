@@ -69,6 +69,7 @@ export function WhatsAppModal({ open, onClose, initialService }: WhatsAppModalPr
           >
             <motion.form
               onSubmit={handleSubmit}
+              noValidate
               className="w-full max-w-lg rounded-[2rem] bg-white p-6 shadow-soft"
               initial={{ y: 28, opacity: 0, scale: 0.96 }}
               animate={{ y: 0, opacity: 1, scale: 1 }}
@@ -102,7 +103,7 @@ export function WhatsAppModal({ open, onClose, initialService }: WhatsAppModalPr
                     name="name"
                     autoComplete="name"
                     className="h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-brand-ink outline-none transition focus:border-brand-blue focus:bg-white focus:ring-4 focus:ring-brand-sky/15"
-                    placeholder="Your name"
+                    placeholder="First and last name"
                   />
                   {errors.name ? <span className="text-xs font-medium text-red-600">{errors.name}</span> : null}
                 </label>

@@ -71,14 +71,14 @@ export function WorkWithUsForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-[2rem] bg-white p-5 shadow-soft md:p-7">
+    <form onSubmit={handleSubmit} noValidate className="rounded-[2rem] bg-white p-5 shadow-soft md:p-7">
       <p className="mb-6 text-sm leading-6 text-slate-500">Enter your name and choose the service you can do.</p>
 
       <input name="companyWebsite" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Name" error={errors.name}>
-          <input name="name" autoComplete="name" placeholder="Your full name" className="field-input" />
+          <input name="name" autoComplete="name" placeholder="First and last name" className="field-input" />
         </Field>
 
         <Field label="Service You Can Do" error={errors.serviceType}>

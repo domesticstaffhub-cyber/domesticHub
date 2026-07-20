@@ -82,7 +82,7 @@ export function ServiceRequestForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-[2rem] bg-white p-5 shadow-soft md:p-7">
+    <form onSubmit={handleSubmit} noValidate className="rounded-[2rem] bg-white p-5 shadow-soft md:p-7">
       <div className="mb-6 flex items-center gap-3">
         <span className="grid h-11 w-11 place-items-center rounded-2xl bg-brand-blue/10 text-brand-blue">
           <ShieldCheck size={22} />
@@ -100,7 +100,7 @@ export function ServiceRequestForm() {
           <input
             name="name"
             autoComplete="name"
-            placeholder="Your full name"
+            placeholder="First and last name"
             className="field-input"
           />
         </Field>
@@ -110,7 +110,7 @@ export function ServiceRequestForm() {
             name="email"
             type="email"
             autoComplete="email"
-            placeholder="you@example.com"
+            placeholder="name@example.com"
             className="field-input"
           />
         </Field>
